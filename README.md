@@ -1,16 +1,16 @@
-# MATLAB Fall 2014 – Research Plan (Template)
+﻿# MATLAB Fall 2016 – Research Plan (Template)
 (text between brackets to be removed)
 
-> * Group Name: (be creative!)
-> * Group participants names: (alphabetically sorted by last name)
-> * Project Title: (can be changed later)
+> * Group Name: (TO DO)
+> * Group participants names: Davide Bernardoni, Enea Masina, Oliver Moral, Sara Pensotti
+> * Project Title: The Gotthard Pass
 
 ## General Introduction
 
-(States your motivation clearly: why is it important / interesting to solve this problem?)
-(Add real-world examples, if any)
-(Put the problem into a historical context, from what does it originate? Are there already some proposed solutions?)
-
+CI siamo interassati a questo progetto perché ci tocca da vicino: noi abiatiamo al di la del passo e ogniqualvolta ci vogliamo recare nella
+svizzera tdesca dobbiamo affrontare il passo o la galleria.
+In questo tratto di strada, soprattutto da quando sono iniziati i lavori sulla strada, ci sono quotidinamente lunghe code che si traducono in un tempo di viaggio maggioranto anche di diverse ore.
+Da molti anni ormai il gottardo rapprsente una fondamentale via di comunicazioni tra il nord e il sud non solo della nostra nazione ma anche dell'europa;
 ## The Model
 
 (Define dependent and independent variables you want to study. Say how you want to measure them.) (Why is your model a good abtraction of the problem you want to study?) (Are you capturing all the relevant aspects of the problem?)
@@ -29,7 +29,8 @@
 
 ## References 
 
-(Add the bibliographic references you intend to use)
+Modelling the phenomenon of congestion at Gotthard, Eric Hayoz, Janick Zwyssig
+ASTRA
 (Explain possible extension to the above models)
 (Code / Projects Reports of the previous year)
 
