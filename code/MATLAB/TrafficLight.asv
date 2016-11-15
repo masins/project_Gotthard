@@ -28,7 +28,7 @@ if mod (lt, ttot)>0 && mod (lt, ttot)<greenleft
 end
 
 %green light right
-if(mod(lt,ttot) > (ttot - greenright - waitright) &&  mod(lt,ttot) < (ttot - waitright))
+if(mod(lt,ttot) > (greenleft + waitleft) &&  mod(lt,ttot) < 170)
     if Rigthline(1,1)==-1
         nRigthline(1,1)=0;
         nCenterline(1,length(nCenterline)) =-1;

@@ -2,7 +2,16 @@
 
 %A is the line vere care move from left to right
 %B is the line vere care move from right to left
+
+%traffic light a parameters
 lta=0;
+greenlefta = 60;
+waitlefta = 50;
+greenrighta = 60;
+waitrighta = 50;
+lttota = greenlefta + waitlefta + greenrighta + waitrighta;
+
+
 simtime=1000000;
 TE=zeros(1,simtime);
 TD=zeros(1,simtime);
@@ -54,7 +63,7 @@ for t=1:1:simtime
     end
     
     %traffic light
-    [lta, A, B, C] = TrafficLight(lta, A, B, C);
+    [lta, A, B, C] = TrafficLight(lta, A, B, C, lttota, greenlefta, waitlefta, greenrighta, waitrighta);
     
     %empting D and plotting what is going out
     if D(1,1) == 0
