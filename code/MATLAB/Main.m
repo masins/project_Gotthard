@@ -2,6 +2,11 @@
 
 %A is the line vere care move from left to right
 %B is the line vere care move from right to left
+lta=0;
+simtime=1000000;
+TE=zeros(1,simtime);
+TD=zeros(1,simtime);
+
 af=15;
 bf=15;
 cf=15;
@@ -15,7 +20,7 @@ E=zeros(1,ef);
 
 
 
-for t=1:1:10000
+for t=1:1:simtime
     %move the car to the new section after finish c
     if C(1,length(C))==1
         C(1,length(C))= 0;
@@ -49,18 +54,7 @@ for t=1:1:10000
     end
     
     %traffic light
-    if (mod(t,220) < 60)
-        if A(1,length(A))==1
-            A(1,length(A))=0;
-            C(1,1) =1;
-        end
-    end
-    if(mod(t,220) >= 110 &&  mod(t,220) < 170)
-        if B(1,1)==-1
-            B(1,1)=0;
-            C(1,length(C)) =-1;
-        end
-    end
+    [lta, A, B, C] = TrafficLight(lta, A, B, C);
     
     %empting D and plotting what is going out
     if D(1,1) == 0
@@ -77,7 +71,7 @@ for t=1:1:10000
     end
     if E(1,length(E))==1
         E(1,length(E))=0;
-        TE(1,t)=-1;
+        TE(1,t)=1;
     end
     
     
