@@ -1,7 +1,11 @@
-%INPUT a Line
-%OUTPUT if there is a car at hte end of the line htat is waiting to pass to
-%the nwe line retun 1 for waiting rightr return -1 for waitingleft else
-%return 0
+%INPUT: a Line
+%
+%OUTPUT: 
+% return 0 iff there is no car waiting
+% return 1 iff there is a car waiting on the RIGHT
+% return -1 iff there is a car waiting on the LEFT
+%
+% a car waits in the last position before the traffic light
 
 function y = WaitCarPresence(Line)
  

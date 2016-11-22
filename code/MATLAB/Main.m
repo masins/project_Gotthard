@@ -1,21 +1,37 @@
-%test muovere elemento in vettore
+%
+%A: line from left to right first side
+%B: line from right to left first side
+%C: double line first side
+%D: free line from right to left first side
+%E: line from left to right second side
+%G: line from right to left second side
+%F: double line second side
+%H: free line from left to right second side
+%
+% ---------------_____________-------------------____________--------------
+%    <<Line D<<                    <<Line B<<                  <<Line G<<
+% --------------- <<Line C>>  ------------------- <<Line F>> --------------
+%    >>LIne A>>  _____________     >>Line E>>    ____________ >>Line H>>            
+% ---------------             ------------------             --------------
+%       
 
-%A is the line vere care move from left to right
-%B is the line vere care move from right to left
+% FIRST traffic light parameters
+lt1=0;
+greenleft1 = 60;
+waitleft1 = 50;
+greenright1 = 60;
+waitright1 = 50;
+lttot1 = greenleft1 + waitleft1 + greenright1 + waitright1;
 
-%traffic light a parameters
-lta=0;
-greenlefta = 60;
-waitlefta = 50;
-greenrighta = 60;
-waitrighta = 50;
-lttota = greenlefta + waitlefta + greenrighta + waitrighta;
-
-
+% Simulation time parameters
 simtime=1000000;
 TE=zeros(1,simtime);
 TD=zeros(1,simtime);
 
+% set lines:
+% set lenght
+% initally void
+%
 af=15;
 bf=15;
 cf=15;
@@ -41,7 +57,7 @@ for t=1:1:simtime
         D(1,length(D))=-1;
     end
     
-    %every 3 second each car moves 1  space forward if it is possible
+    %every 3 second each car moves 1 space forward iff possible
     if (mod(t,3) == 0)
         A = MoveForward(A);
         E = MoveForward(E);
@@ -52,18 +68,18 @@ for t=1:1:simtime
         
     end
     
-    %a new car enter the A arry
+    %new car enters A line
     if mod(t,7)==0
         A = CreateForward(A);
     end
     
-    %a new car enter the B arry
+    %new car enters B line
     if mod(t,8) == 0
         B = CreateBackward(B);
     end
     
     %traffic light
-    [lta, A, B, C] = TrafficLight(lta, A, B, C, lttota, greenlefta, waitlefta, greenrighta, waitrighta);
+    [lt1, A, B, C] = TrafficLight(lt1, A, B, C, lttot1, greenleft1, waitleft1, greenright1, waitright1);
     
     %empting D and plotting what is going out
     if D(1,1) == 0

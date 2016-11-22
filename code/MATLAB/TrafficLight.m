@@ -1,12 +1,22 @@
-%the time counter
+%
+% INPUT
+% Leftline, Rightline: right and left line with cars waiting
+% Centerline: line with cars passing in both directions
+%
+% OUTPUT
+% nlt: new light time, corresponds to the time of the traffic light
+% nLeftline, nRightline, nCenterline: new situazion of lines is returned
 function [nlt, nLeftline, nRigthline, nCenterline] = TrafficLight (lt, Leftline, Rigthline, Centerline, ttot, greenleft, waitleft, greenright, waitright)
-%initialasing
+
+%initializing temporary variables
+%
 nlt = lt;
 nLeftline = Leftline;
 nRigthline = Rigthline;
 nCenterline = Centerline;
 
-%check time and presence
+%check time and eventual presence of cars
+%
 if lt == 0
     if WaitCarPresence(Leftline) == 1
         nlt = 1;
@@ -19,7 +29,7 @@ if lt ~= 0
     nlt = 1+ lt;
 end
 
-%green light left
+%check if light is green on the LEFT
 if mod (lt, ttot)>0 && mod (lt, ttot)<greenleft
     if WaitCarPresence(Leftline) == 1
         nLeftline(1,length(nLeftline))=0;
@@ -27,7 +37,7 @@ if mod (lt, ttot)>0 && mod (lt, ttot)<greenleft
     end
 end
 
-%green light right
+%check if light is green on the RIGHT
 if(mod(lt,ttot) > (ttot - greenright - waitright) &&  mod(lt,ttot) < (ttot - waitright))
     if Rigthline(1,1)==-1
         nRigthline(1,1)=0;
@@ -35,14 +45,14 @@ if(mod(lt,ttot) > (ttot - greenright - waitright) &&  mod(lt,ttot) < (ttot - wai
     end
 end
 
-%after green ligth left check if rigth car are waiting if there aren't
+%after green ligth left assert Centerline is empty
 %reset time
 if mod(lt,ttot) == (greenleft + waitleft)
     if WaitCarPresence(Rigthline)== 0
         nlt = 0;
     end
 end
-%after green ligth rigth check if lest car are waiting if there aren't
+%after green ligth rigth assert Centerline is empty
 %reset time
 if mod(lt,ttot) == greenleft
     if WaitCarPresence(nLeftline)== 0
