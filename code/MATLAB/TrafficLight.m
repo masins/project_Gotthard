@@ -6,6 +6,7 @@
 % OUTPUT
 % nlt: new light time, corresponds to the time of the traffic light
 % nLeftline, nRightline, nCenterline: new situazion of lines is returned
+
 function [nlt, nLeftline, nRigthline, nCenterline] = TrafficLight (lt, Leftline, Rigthline, Centerline, ttot, greenleft, waitleft, greenright, waitright)
 
 %initializing temporary variables
@@ -45,14 +46,15 @@ if(mod(lt,ttot) > (ttot - greenright - waitright) &&  mod(lt,ttot) < (ttot - wai
     end
 end
 
-%after green ligth left assert Centerline is empty
+%if green light was on the left, check car presence on the right
 %reset time
 if mod(lt,ttot) == (greenleft + waitleft)
     if WaitCarPresence(Rigthline)== 0
         nlt = 0;
     end
 end
-%after green ligth rigth assert Centerline is empty
+
+%if green light was on the right, check car presence on the left
 %reset time
 if mod(lt,ttot) == greenleft
     if WaitCarPresence(nLeftline)== 0

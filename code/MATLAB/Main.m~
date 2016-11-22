@@ -11,7 +11,7 @@
 % ---------------_____________-------------------____________--------------
 %    <<Line D<<                    <<Line G<<                  <<Line B<<
 % --------------- <<Line C>>  ------------------- <<Line F>> --------------
-%    >>Line A>>  _____________     >>Line E>>    ____________  >>Line H>>            
+%    >>LIne A>>  _____________     >>Line E>>    ____________  >>Line H>>            
 % ---------------             ------------------             --------------
 %       
 
@@ -31,7 +31,7 @@ greenright2 = 60;
 waitright2 = 50;
 lttot2 = greenleft2 + waitleft2 + greenright2 + waitright2;
 
-% Simulation time parameters (DA CAMBIARE)
+% Simulation time parameters
 simtime=1000000;
 TE=zeros(1,simtime);
 TD=zeros(1,simtime);
@@ -100,12 +100,12 @@ for t=1:1:simtime
     %every 4 second each car moves 1 space forward iff possible 
     %SECOND SIDE
     if (mod(t,4) == 0)
-        H = MoveForward(H);
-        %E = MoveForward(E);
+        A = MoveForward(A);
+        E = MoveForward(E);
         B = MoveBackward(B);
-        %G = MoveBackward(G);
-        F = MoveForward(F);
-        F = MoveBackward(F);
+        D = MoveBackward(D);
+        C = MoveForward(C);
+        C = MoveBackward(C);
         
     end
     
@@ -120,8 +120,7 @@ for t=1:1:simtime
     end
     
     %traffic light
-    [lt1, A, G, C] = TrafficLight(lt1, A, G, C, lttot1, greenleft1, waitleft1, greenright1, waitright1);
-    [lt2, E, B, F] = TrafficLight(lt2, E, B, F, lttot2, greenleft2, waitleft2, greenright2, waitright2);
+    [lt1, A, B, C] = TrafficLight(lt1, A, B, C, lttot1, greenleft1, waitleft1, greenright1, waitright1);
     
     %empting D and plotting what is going out
     if D(1,1) == 0
@@ -140,5 +139,6 @@ for t=1:1:simtime
         E(1,length(E)) = 0;
         TE(1,t)=1;
     end
+    
     
 end
