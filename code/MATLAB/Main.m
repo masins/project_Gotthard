@@ -13,22 +13,27 @@
 % --------------- <<Line C>>  ------------------- <<Line F>> --------------
 %    >>Line A>>  _____________     >>Line E>>    ____________  >>Line H>>            
 % ---------------             ------------------             --------------
-%       
+%
+
+%time initialise
+m = 0;
+h = 0;
+d = 0;
 
 % FIRST traffic light parameters
 lt1=0;
-greenleft1 = 60;
-waitleft1 = 50;
-greenright1 = 60;
-waitright1 = 50;
+greenleft1 = 30;
+waitleft1 = 40;
+greenright1 = 30;
+waitright1 = 40;
 lttot1 = greenleft1 + waitleft1 + greenright1 + waitright1;
 
 % SECOND traffic light parameters
 lt2=0;
-greenleft2 = 60;
-waitleft2 = 50;
-greenright2 = 60;
-waitright2 = 50;
+greenleft2 = 30;
+waitleft2 = 40;
+greenright2 = 30;
+waitright2 = 40;
 lttot2 = greenleft2 + waitleft2 + greenright2 + waitright2;
 
 % Simulation time parameters (DA CAMBIARE)
@@ -40,15 +45,15 @@ TD=zeros(1,simtime);
 % set lines:
 % set lenght
 % initially void
-%
-af=15;
-bf=15;
-cf=15;
-df=15;
-ef=15;
-ff=15;
-gf=15;
-hf=15;
+% a space is 5 meter
+af=250;
+bf=250;
+cf=78;
+df=af;
+ef=136;
+ff=100;
+gf=ef;
+hf=bf;
 A=zeros(1,af);
 B=zeros(1,bf);
 C=zeros(1,cf);
@@ -61,6 +66,24 @@ H=zeros(1,hf);
 
 
 for t=1:1:simtime
+    
+    % minute counter
+    if (t>0) && (mod(t,59)==0)
+        m = m+1;
+    end
+    %houar cunter
+    if (m>0) && (mod(m,59)==0)
+        h = h+1;
+        m = 0;
+    end
+    
+    % day counter
+    if (h>0) && (mod(h,23)==0)
+        d = d+1;
+        h=0;
+    end
+    
+    
     %move car to the new section after finish C --> E
     if C(1,length(C))==1
         C(1,length(C))= 0;
@@ -85,38 +108,226 @@ for t=1:1:simtime
         G(1,length(G))=-1;
     end
     
-    %every 3 second each car moves 1 space forward iff possible 
+    %each car moves 2 space forward iff possible 
     %FIRST SIDE
-    if (mod(t,3) == 0)
-        A = MoveForward(A);
-        E = MoveForward(E);
-        G = MoveBackward(G);
-        D = MoveBackward(D);
-        C = MoveForward(C);
-        C = MoveBackward(C);
-        
-    end
+    A = MoveForward(A);
+    A = MoveForward(A);
+    E = MoveForward(E);
+    E = MoveForward(E);
+    G = MoveBackward(G);
+    G = MoveBackward(G);
+    D = MoveBackward(D);
+    D = MoveBackward(D);
+    C = MoveForward(C);
+    C = MoveForward(C);
+    C = MoveBackward(C);
+    C = MoveBackward(C);
     
-    %every 4 second each car moves 1 space forward iff possible 
+    %every second each car moves 2 space forward iff possible 
     %SECOND SIDE
-    if (mod(t,4) == 0)
-        H = MoveForward(H);
-        %E = MoveForward(E);
-        B = MoveBackward(B);
-        %G = MoveBackward(G);
-        F = MoveForward(F);
-        F = MoveBackward(F);
+    H = MoveForward(H);
+    H = MoveForward(H);
+    B = MoveBackward(B);
+    B = MoveBackward(B);
+    F = MoveForward(F);
+    F = MoveForward(F);
+    F = MoveBackward(F);
+    F = MoveBackward(F);
+    
+    
+    %new car enters A line each houar
+    %00:00 - 00:59
+    if h<1
+        if mod(t,1200) == 0
+            A = CreateForward(A);
+        end
+    %01:00
+    elseif 1<= h && h < 2
+        if mod(t,3600) == 0
+            A = CreateForward(A);
+        end
+    %02:00 - 04:59
+    elseif 2<= h && h<5
+        if mod(t,1200) == 0
+            A = CreateForward(A);
+        end
+    %05:00 - 05:59
+    elseif 5<= h && h<6
+        if mod(t,720) == 0
+            A = CreateForward(A);
+        end
+    %06:00 - 06:59
+    elseif 6<= h && h<7
+        if mod(t,180) == 0
+            A = CreateForward(A);
+        end
+    %07:00 - 07:59
+    elseif 7<= h && h<8
+        if mod(t,88) == 0
+            A = CreateForward(A);
+        end
+    %08:00 - 08:59
+    elseif 8<= h && h<9
+        if mod(t,45) == 0
+            A = CreateForward(A);
+        end
+    %09:00 - 09:59
+    elseif 9<= h && h<10
+        if mod(t,24) == 0
+            A = CreateForward(A);
+        end
+    %10:00 - 10:59
+    elseif 10<= h && h<11
+        if mod(t,15) == 0
+            A = CreateForward(A);
+        end
+    %11:00 - 11:59
+    elseif 11<= h && h<12
+        if mod(t,9) == 0
+            A = CreateForward(A);
+        end
+    %12:00 - 12:59
+    elseif 12<= h && h<13
+        if mod(t,10) == 0
+            A = CreateForward(A);
+        end
+    %13:00 - 13:59
+    elseif 13<= h && h<14
+        if mod(t,7) == 0
+            A = CreateForward(A);
+        end
+    %14:00 - 17:59
+    elseif 14<= h && h<18
+        if mod(t,8) == 0
+            A = CreateForward(A);
+        end       
+    %18:00 - 18:59
+    elseif 18<= h && h<19
+        if mod(t,12) == 0
+            A = CreateForward(A);
+        end
+    %19:00 - 20:59
+    elseif 19<= h && h<21
+        if mod(t,23) == 0
+            A = CreateForward(A);
+        end
+    %21:00 - 21:59
+    elseif 21<= h && h<22
+        if mod(t,29) == 0
+            A = CreateForward(A);
+        end
+    %22:00 - 22:59
+    elseif 22<= h && h<23
+        if mod(t,54) == 0
+            A = CreateForward(A);
+        end
+    %23:00 - 23:59
+    elseif 23<= h && h<24
+        if mod(t,60) == 0
+            A = CreateForward(A);
+        end
+    else
+        error('Error. \nIn the create in line A the variable hour (h) take value %d',h);
+    end
         
-    end
-    
-    %new car enters A line
-    if mod(t,7)==0
-        A = CreateForward(A);
-    end
-    
-    %new car enters B line
-    if mod(t,8) == 0
-        B = CreateBackward(B);
+    %new car enters B line each houar
+    %00:00 - 00:59
+    if h<1
+        if mod(t,900) == 0
+            B = CreateBackward(B);
+        end
+        %01:00 - 04:59
+    elseif 1<= h && h < 5
+        if mod(t,3600) == 0
+            B = CreateBackward(B);
+        end
+        %05:00 - 05:59
+    elseif 5<= h && h<6
+        if mod(t,1800) == 0
+            B = CreateBackward(B);
+        end
+        %06:00 - 06:59
+    elseif 6<= h && h<7
+        if mod(t,514) == 0
+            B = CreateBackward(B);
+        end
+        %07:00 - 07:59
+    elseif 7<= h && h<8
+        if mod(t,150) == 0
+            B = CreateBackward(B);
+        end
+        %08:00 - 08:59
+    elseif 8<= h && h<9
+        if mod(t,106) == 0
+            B = CreateBackward(B);
+        end
+        %09:00 - 09:59
+    elseif 9<= h && h<10
+        if mod(t,77) == 0
+            B = CreateBackward(B);
+        end
+        %10:00 - 10:59
+    elseif 10<= h && h<11
+        if mod(t,43) == 0
+            B = CreateBackward(B);
+        end
+        %11:00 - 11:59
+    elseif 11<= h && h<12
+        if mod(t,21) == 0
+            B = CreateBackward(B);
+        end
+        %12:00 - 12:59
+    elseif 12<= h && h<13
+        if mod(t,10) == 0
+            B = CreateBackward(B);
+        end
+        %13:00 - 13:59
+    elseif 13<= h && h<14
+        if mod(t,8) == 0
+            B = CreateBackward(B);
+        end
+        %14:00 - 16:59
+    elseif 14<= h && h<17
+        if mod(t,7) == 0
+            B = CreateBackward(B);
+        end
+        %17:00 - 17:59
+    elseif 17<= h && h<18
+        if mod(t,9) == 0
+            B = CreateBackward(B);
+        end
+        %18:00 - 18:59
+    elseif 18<= h && h<19
+        if mod(t,11) == 0
+            B = CreateBackward(B);
+        end
+        %19:00 - 19:59
+    elseif 19<= h && h<20
+        if mod(t,15) == 0
+            B = CreateBackward(B);
+        end
+        %20:00 - 20:59
+    elseif 20<= h && h<21
+        if mod(t,19) == 0
+            B = CreateBackward(B);
+        end
+        %21:00 - 21:59
+    elseif 21<= h && h<22
+        if mod(t,30) == 0
+            B = CreateBackward(B);
+        end
+        %22:00 - 22:59
+    elseif 22<= h && h<23
+        if mod(t,41) == 0
+            B = CreateBackward(B);
+        end
+        %23:00 - 23:59
+    elseif 23<= h && h<24
+        if mod(t,80) == 0
+            B = CreateBackward(B);
+        end
+    else
+        error('Error. \nIn the create in line B the variable hour (h) take value %d',h);
     end
     
     %traffic light
