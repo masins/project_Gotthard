@@ -70,10 +70,8 @@ elseif((mod(t,ttot)>(tg+tr)) && (mod(t,ttot)<=(2*tg+tr)))
     end
 end
 
-% increment timer if is in normal stateI t > 0 && t < ttot
-% reset timer if t = 0 || t = ttot
-% error if timer is out of range: t < 0 || t > ttot
-%
+%fai avanzare o resetta timer
+%Errore se timer prende valore non concesso
 if nt == ttot
     nt = 0;
 elseif ((nt>0) && (nt < ttot))
