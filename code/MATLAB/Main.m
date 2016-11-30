@@ -138,7 +138,7 @@ for t=1:1:simtime
     
     %new car enters A line each houar
     
-    
+    %
     %00:00 - 00:59
     if h<1
         if mod(t,1200) == 0
@@ -583,7 +583,6 @@ for t=1:1:simtime
     if mod(t,3600) == 0 && h < 26
         fluxD(1,h+1)=car_counterD;
         fluxH(1,h+1)=car_counterH;
-        h = h + 1;
         car_counterD = 0;
         car_counterH = 0;
     end
