@@ -20,7 +20,12 @@ m = 0;
 h = 0;
 d = 0;
 
-%variable for test that there are no auto crash
+%data from excel file
+numr1 = xlsread('Copia_di_Dati2015Gottardo(2830).xlsx',2,'F45:AC47');
+R1=round(numr1);
+
+numr2 = xlsread('Copia_di_Dati2015Gottardo(2830).xlsx',3,'F45:AC47');
+R2=round(numr1);
 
 % FIRST traffic light parameters
 timer1=0;
@@ -132,6 +137,8 @@ for t=1:1:simtime
     
     
     %new car enters A line each houar
+    
+    
     %00:00 - 00:59
     if h<1
         if mod(t,1200) == 0
@@ -225,8 +232,115 @@ for t=1:1:simtime
     else
         error('Error. \nIn the create in line A the variable hour (h) take value %d',h);
     end
-        
+    %}   
+    %con case switch
+    %{
+    switch h
+        case 0
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+            
+        case 1
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 2
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 3
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 4
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 5
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 6
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 7
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 8
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 9
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 10
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 11
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 12
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 13
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 14
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 15
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 16
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 17
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 18
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 19
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 20
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 21
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 22
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        case 23
+            if mod(t,R1(d+1,h+1)) == 0
+                A = CreateForward(A);
+            end
+        otherwise
+            error('Error. \nIn the create in line A the variable hour (h) take value %d',h);
+            
+    end
+    %}
+    
     %new car enters B line each houar
+    %
     %00:00 - 00:59
     if h<1
         if mod(t,900) == 0
@@ -325,6 +439,113 @@ for t=1:1:simtime
     else
         error('Error. \nIn the create in line B the variable hour (h) take value %d',h);
     end
+    %}
+    %con case switch
+    %{
+        switch h
+        case 0
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+            
+        case 1
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 2
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 3
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 4
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 5
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 6
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 7
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 8
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 9
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 10
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 11
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 12
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 13
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 14
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 15
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 16
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 17
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 18
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 19
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 20
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 21
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 22
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 23
+            if mod(t,R2(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        otherwise
+            error('Error. \nIn the create in line A the variable hour (h) take value %d',h);
+            
+    end
+    %}
+    
     
     %traffic light
     [A, G, C, timer1] = TrafficLight(A, G, C, timer1, tg1, tr1, ttot1);
@@ -358,3 +579,11 @@ for t=1:1:simtime
     end
        
 end
+figure
+subplot(2,1,1)       % add first plot in 2 x 1 grid
+area(fluxD)
+title('fluxD')
+
+subplot(2,1,2)       % add second plot in 2 x 1 grid
+area(fluxH)       
+title('fluxH')
