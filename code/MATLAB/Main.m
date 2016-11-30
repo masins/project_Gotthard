@@ -151,7 +151,7 @@ for t=1:1:simtime
         end
     %02:00 - 04:59
     elseif 2<= h && h<5
-        if mod(t,1200) == 0
+        if mod(t,3600) == 0
             A = CreateForward(A);
         end
     %05:00 - 05:59
@@ -444,100 +444,100 @@ for t=1:1:simtime
     %{
         switch h
         case 0
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
             
         case 1
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 2
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 3
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 4
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 5
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 6
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 7
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 8
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 9
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 10
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 11
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 12
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 13
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 14
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 15
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 16
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 17
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 18
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 19
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 20
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 21
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 22
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         case 23
-            if mod(t,R2(1,h+1)) == 0
+            if mod(t,R2(d+1,h+1)) == 0
                 B = CreateBackward(B);
             end
         otherwise
