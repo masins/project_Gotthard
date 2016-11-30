@@ -199,11 +199,21 @@ for t=1:1:simtime
         if mod(t,7) == 0
             A = CreateForward(A);
         end
-    %14:00 - 17:59
-    elseif 14<= h && h<18
+    %14:00 - 14:59
+    elseif 14<= h && h<15
         if mod(t,8) == 0
             A = CreateForward(A);
-        end       
+        end
+    %15:00 - 16:59
+    elseif 15<= h && h<17
+        if mod(t,8) == 0
+            A = CreateForward(A);
+        end
+    %17:00 - 17:59
+    elseif 17<= h && h<18
+        if mod(t,8) == 0
+            A = CreateForward(A);
+        end  
     %18:00 - 18:59
     elseif 18<= h && h<19
         if mod(t,12) == 0
