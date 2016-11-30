@@ -20,6 +20,8 @@ m = 0;
 h = 0;
 d = 0;
 
+%variable for test that there are no auto crash
+
 % FIRST traffic light parameters
 lt1=0;
 greenleft1 = 30;

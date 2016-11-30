@@ -1,29 +1,27 @@
-%INPUT: L: left line, R: right line, C: center line, t: timer, 
-%tg: time green, ttr: time red
-function [nL,nR,nC,nt] = test_semaforo(L,R,C,t,tg,tr)
+%INPUT: L: left line, R
+function [nL,nR,nC,nt] = test_semaforo(L,R,C,t,tg,w,tr)
 
 nL = L;
 nR = R;
 nC = C;
 nt = t;
-ttot = 2*tg+2*tr;
 
 %SEMAFORO IN SE
-if(mod(t,ttot) > 0 && mod(t,ttot) <= tg)
+if(mod(t,80) > 0 && mod(t,80) <= 20)
     if(nL(1,50) == 1)
         nC = CreateForward(nC);
         nL(1, 50) = 0;
     end
-elseif((mod(t,ttot)>(tg+tr)) && (mod(t,ttot)<=(2*tg+tr)))
+elseif((mod(t,80)>40) && (mod(t,80)<=60))
     if(nR(1,1)==-1)
         nR(1,1)=0;
         nC = CreateBackward(nC);
     end
 end
 
-if nt == ttot
+if nt == 80
     nt = 1;
-elseif nt < ttot
+elseif nt < 80
     nt = nt +1;
 else
     error('Error. The timer takes wrong value \ntimer = %d',t);
