@@ -356,6 +356,5 @@ for t=1:1:simtime
         car_counterD = 0;
         car_counterH = 0;
     end
-    
-    
+       
 end
