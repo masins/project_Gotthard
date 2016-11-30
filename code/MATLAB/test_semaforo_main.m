@@ -1,6 +1,6 @@
 
-A = zeros(1,50);
 B = zeros(1,50);
+A = zeros(1,50);
 C = zeros(1,50);
 D = zeros(1,50);
 X = zeros(1,10);
@@ -15,6 +15,11 @@ fluxD = zeros(1,24);
 fluxB = zeros(1,24);
 h=1;
 
+numr1 = xlsread('Copia_di_Dati2015Gottardo(2830).xlsx',2,'F14:AC14');
+d0r1=round(numr1);
+
+
+%{
 for t = 1 : 1 : 86400
     
     % create car
@@ -70,3 +75,174 @@ for t = 1 : 1 : 86400
     end
     
 end
+%}
+
+for t=1:1:89400
+    
+    
+     %houar cunter
+    if (t>0) && (mod(t,3600)==0)
+        h = h+1;
+    end
+    if h == 24
+        h=0;
+    end
+    
+    switch h
+        case 0
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+            
+        case 1
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 2
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 3
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 4
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 5
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 6
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 7
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 8
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 9
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 10
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 11
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 12
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 13
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 14
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 15
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 16
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 17
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 18
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 19
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 20
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 21
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 22
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        case 23
+            if mod(t,d0r1(1,h+1)) == 0
+                B = CreateBackward(B);
+            end
+        otherwise
+            error('Error. \nIn the create in line A the variable hour (h) take value %d',h);
+            
+    end
+end
+    
+%case per fare copia incolla
+%{
+        switch h
+        case 0
+        
+        case 1
+            
+        case 2
+            
+        case 3
+            
+        case 4
+            
+        case 5
+            
+        case 6
+            
+        case 7
+            
+        case 8
+            
+        case 9
+            
+        case 10
+            
+        case 11
+            
+        case 12
+            
+        case 13
+            
+        case 14
+            
+        case 15
+            
+        case 16
+            
+        case 17
+            
+        case 18
+            
+        case 19
+            
+        case 20
+            
+        case 21
+            
+        case 22
+            
+        case 23
+            
+            otherwise
+        end
+    %}
