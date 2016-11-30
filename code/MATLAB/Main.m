@@ -42,8 +42,12 @@ lttot2 = greenleft2 + waitleft2 + greenright2 + waitright2;
 simtime=86400;
 TH=zeros(1,simtime);
 TD=zeros(1,simtime);
-counter = 0;
-fluxD=zeros(1,25);
+%counter = 0;
+%fluxD=zeros(1,25);
+car_counterD = 0;
+car_counterH = 0;
+fluxD = zeros(1,25);
+fluxH = zeros(1,25);
 
 
 % set lines:
@@ -80,7 +84,6 @@ for t=1:1:simtime
         h = h+1;
         m = 0;
     end
-    
     % day counter
     if (h>0) && (mod(h,23)==0)
         d = d+1;
@@ -93,7 +96,6 @@ for t=1:1:simtime
         C(1,length(C))= 0;
         E(1,1)=1;
     end
-    
     %move car to the new section after finish F --> H
     if F(1,length(F))==1
         F(1,length(F))= 0;
@@ -105,14 +107,13 @@ for t=1:1:simtime
         C(1,1)= 0;
         D(1,length(D))=-1;
     end
-    
     %move car to the new section after finish F --> G
     if F(1,1)==-1
         F(1,1)= 0;
         G(1,length(G))=-1;
     end
     
-    %each car moves 2 space forward iff possible 
+    %each car moves 2 space forward if possible 
     %FIRST SIDE
     A = MoveForward(A);
     A = MoveForward(A);
@@ -126,9 +127,6 @@ for t=1:1:simtime
     C = MoveForward(C);
     C = MoveBackward(C);
     C = MoveBackward(C);
-    
-    %every second each car moves 2 space forward iff possible 
-    %SECOND SIDE
     H = MoveForward(H);
     H = MoveForward(H);
     B = MoveBackward(B);
@@ -338,7 +336,7 @@ for t=1:1:simtime
     [lt1, A, G, C] = TrafficLight(lt1, A, G, C, lttot1, greenleft1, waitleft1, greenright1, waitright1);
     [lt2, E, B, F] = TrafficLight(lt2, E, B, F, lttot2, greenleft2, waitleft2, greenright2, waitright2);
     
-    
+    %{
     %D and plotting what is going out
     if H(1,length(H)) == 0
         counter = counter + 0;
@@ -352,24 +350,33 @@ for t=1:1:simtime
         %plot (fluxD(1,h+1));
         counter = 0;
     end
-    
+    %}
     
     %empting D and plotting what is going out
     if D(1,1) == 0
         TD(1,t)=0;
-    end
-    if D(1,1)==-1
+    elseif D(1,1)==-1
         D(1,1)=0;
         TD(1,t)=-1;
+        car_counterD = car_counterD + 1;
     end
     
-    %empting D and plotting what is going out
+    %empting H and plotting what is going out
     if H(1,length(H)) == 0
         TH(1,t)=0;
-    end
-    if H(1,length(H)) == 1
+    elseif H(1,length(H)) == 1
         H(1,length(H)) = 0;
         TH(1,t)=1;
+        car_counterH = car_counterH +1;
+    end
+    
+    %Plotting things
+    if mod(t,3600) == 0 && h < 25
+        fluxD(1,h)=car_counterD;
+        fluxH(1,h)=car_counterB;
+        h = h + 1;
+        car_counterD = 0;
+        car_counterB = 0;
     end
     
     
