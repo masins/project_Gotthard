@@ -3,7 +3,7 @@ function TestCrash(X)
 testright = 0;
 testleft = 0;
 
-%Chek that there are care in any direction
+% check that there are care in any direction
 for i=1:1:length(X)
     if X(1,i) == 1
         testright = 1;
