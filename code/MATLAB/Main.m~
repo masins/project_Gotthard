@@ -385,16 +385,24 @@ end
 % PLOTS
 % fluxD represents the flux of cars through D
 figure
-subplot(2,1,1)       % add first plot in 2 x 1 grid
-plot(fluxD)
-plot::translate([a,0],a=1)
-title('fluxD')
+subplot(2,1,1) % add first plot in 2 x 1 grid
+xD = 0:24;
+h = area(xD,fluxD)
+h(1).FaceColor = [0 .5 0];
+title('Flux of cars to Bellinzona')
 xlabel('hours')
 ylabel('number of cars')
 
 % fluxH represents the flux of cars through H
-subplot(2,1,2)       % add second plot in 2 x 1 grid
-area(fluxH)      
-title('fluxH')
+subplot(2,1,2) % add second plot in 2 x 1 grid
+xH = 0:24;
+d = area(xH,fluxH)
+d(1).FaceColor = [200/255 200/255 10/255];
+title('Flux of cars to Goeschenen')
 xlabel('hours')
 ylabel('number of cars')
+
+figure
+% confront fluxes
+c = bar(fluxD)
+c(1).color = [0 .5 0];

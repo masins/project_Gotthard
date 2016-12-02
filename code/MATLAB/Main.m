@@ -389,7 +389,8 @@ subplot(2,1,1) % add first plot in 2 x 1 grid
 xD = 0:24;
 h = area(xD,fluxD)
 h(1).FaceColor = [0 .5 0];
-title('fluxD')
+h(1).LineWidth = 1;
+title('Flux of cars to Bellinzona')
 xlabel('hours')
 ylabel('number of cars')
 
@@ -397,7 +398,20 @@ ylabel('number of cars')
 subplot(2,1,2) % add second plot in 2 x 1 grid
 xH = 0:24;
 d = area(xH,fluxH)
-d(1).FaceColor = [0 0.8 0.8];
-title('fluxH')
+d(1).FaceColor = [0.7843 0.7843 0.0392];
+d(1).LineWidth = 1.5;
+title('Flux of cars to Goeschenen')
 xlabel('hours')
 ylabel('number of cars')
+
+figure
+% confront fluxes
+y = zeros(25,2);
+y(:,1) = fluxD(1,:);
+y(:,2) = fluxH(1,:);
+b = bar(y)
+b(1).FaceColor = [0 .5 0];
+b(1).LineWidth = 1.5;
+b(2).FaceColor = [0.7843 0.7843 0.0392];
+b(2).LineWidth = 1.5;
+legend('flux to Bellinzona','flux to Goeschenen');
