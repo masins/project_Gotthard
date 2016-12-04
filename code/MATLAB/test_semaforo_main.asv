@@ -39,10 +39,17 @@ tg2 = 30;
 tr2 = 70;
 ttot2 = 2*tg2+2*tr2;
 
+% Simulation time parameters (DA CAMBIARE)
+simtime=86400;
+TH=zeros(1,simtime);
+TD=zeros(1,simtime);
+car_counterD = 0;
+car_counterH = 0;
+fluxD = zeros(1,25);
+fluxH = zeros(1,25);
 
-
-flux3D= zeros(10,25);
-flux3H= zeros(10,25);
+flux3D= zeros(4,25);
+flux3H= zeros(4,25);
 
 % set lines:
 % set lenght
@@ -65,48 +72,23 @@ F=zeros(1,ff);
 G=zeros(1,gf);
 H=zeros(1,hf);
 
+timer1=0;
+timer2=0;
 
-
-
-for st=1: 1 : 10
-    
-    % Simulation time parameters (DA CAMBIARE)
-simtime=86400;
-TH=zeros(1,simtime);
-TD=zeros(1,simtime);
-car_counterD = 0;
-car_counterH = 0;
-fluxD = zeros(1,25);
-fluxH = zeros(1,25);
-
-%time initialise
-m = 0;
-h = 0;
-d = 0;
+for st=1: 1 : 1
     
     
     % FIRST traffic light parameters
-    timer1=0;
+    
     tg1 = 10*st;
-    tr1 = 40;
+    tr1 = 30 + 10*st;
     ttot1 = 2*tg1+2*tr1;
     
     % SECOND traffic light parameters
-    timer2=0;
+    
     tg2 = 10*st;
     tr2 = 70;
     ttot2 = 2*tg2+2*tr2;
-    
-    %reset corsie
-    A=zeros(1,af);
-B=zeros(1,bf);
-C=zeros(1,cf);
-D=zeros(1,df);
-E=zeros(1,ef);
-F=zeros(1,ff);
-G=zeros(1,gf);
-H=zeros(1,hf);
-
     
     
     for t=1:1:simtime
@@ -457,11 +439,8 @@ H=zeros(1,hf);
     flux3H(st,:) = fluxH;
     
 end
-figure
-    subplot(2,1,1);
-    mesh(flux3D);
-    subplot(2,1,2);
-    mesh(flux3H);
+
+mesh(flux3D)
 
 
 %case per fare copia incolla

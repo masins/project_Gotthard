@@ -40,13 +40,13 @@ tr2 = 70;
 ttot2 = 2*tg2+2*tr2;
 
 % Simulation time parameters (DA CAMBIARE)
-simtime=86400;
+simtime=86400 * 2;
 TH=zeros(1,simtime);
 TD=zeros(1,simtime);
 car_counterD = 0;
 car_counterH = 0;
-fluxD = zeros(1,25);
-fluxH = zeros(1,25);
+fluxD = zeros(1,49);
+fluxH = zeros(1,49);
 
 
 % set lines:
@@ -385,31 +385,31 @@ end
 % PLOTS
 % fluxD represents the flux of cars through D
 figure
-subplot(2,1,1) % add first plot in 2 x 1 grid
+subplot(2,1,1); % add first plot in 2 x 1 grid
 xD = 0:24;
-h = area(xD,fluxD)
-h(1).FaceColor = [0 .5 0];
-h(1).LineWidth = 1;
-title('Flux of cars to Bellinzona')
-xlabel('hours')
-ylabel('number of cars')
+hb = area(xD,fluxD);
+hb(1).FaceColor = [0 .5 0];
+hb(1).LineWidth = 1;
+title('Flux of cars to Bellinzona');
+xlabel('hours');
+ylabel('number of cars');
 
 % fluxH represents the flux of cars through H
-subplot(2,1,2) % add second plot in 2 x 1 grid
+subplot(2,1,2); % add second plot in 2 x 1 grid
 xH = 0:24;
-d = area(xH,fluxH)
+d = area(xH,fluxH);
 d(1).FaceColor = [0.7843 0.7843 0.0392];
 d(1).LineWidth = 1.5;
-title('Flux of cars to Goeschenen')
-xlabel('hours')
-ylabel('number of cars')
+title('Flux of cars to Goeschenen');
+xlabel('hours');
+ylabel('number of cars');
 
 figure
 % confront fluxes
 y = zeros(25,2);
 y(:,1) = fluxD(1,:);
 y(:,2) = fluxH(1,:);
-b = bar(y)
+b = bar(y);
 b(1).FaceColor = [0 .5 0];
 b(1).LineWidth = 1.5;
 b(2).FaceColor = [0.7843 0.7843 0.0392];
