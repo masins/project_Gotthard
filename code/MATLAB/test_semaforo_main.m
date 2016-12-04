@@ -39,10 +39,10 @@ tg2 = 30;
 tr2 = 70;
 ttot2 = 2*tg2+2*tr2;
 
-
-
-flux3D= zeros(10,25);
-flux3H= zeros(10,25);
+%simulzione ripetizioni
+trep = 10;
+flux3D= zeros(trep,24);
+flux3H= zeros(trep,24);
 
 % set lines:
 % set lenght
@@ -68,7 +68,7 @@ H=zeros(1,hf);
 
 
 
-for st=1: 1 : 10
+for st=1: 1 : trep
     
     % Simulation time parameters (DA CAMBIARE)
 simtime=86400;
@@ -76,8 +76,8 @@ TH=zeros(1,simtime);
 TD=zeros(1,simtime);
 car_counterD = 0;
 car_counterH = 0;
-fluxD = zeros(1,25);
-fluxH = zeros(1,25);
+fluxD = zeros(1,24);
+fluxH = zeros(1,24);
 
 %time initialise
 m = 0;
