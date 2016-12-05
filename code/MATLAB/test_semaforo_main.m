@@ -15,7 +15,7 @@
 % ---------------             ------------------             --------------
 %
 
-%time initialise
+%initialise time
 m = 0;
 h = 0;
 d = 0;
@@ -29,31 +29,31 @@ R2=round(numr1);
 
 % FIRST traffic light parameters
 timer1=0;
-tg1 = 30;
+tg1 = 0;
 tr1 = 40;
 ttot1 = 2*tg1+2*tr1;
 
 % SECOND traffic light parameters
 timer2=0;
-tg2 = 30;
+tg2 = 0;
 tr2 = 70;
 ttot2 = 2*tg2+2*tr2;
 
-%simulzione ripetizioni
-trep = 10;
+%number of repetitions of simulation
+trep = 2600;
 flux3D= zeros(trep,24);
 flux3H= zeros(trep,24);
 
 % set lines:
 % set lenght
 % initially void
-% a space is 5 meter
+% a block is 5 meters long
 af=250;
-bf=250;
-cf=78;
-df=af;
 ef=136;
 ff=100;
+cf=78;
+bf=af;
+df=af;
 gf=ef;
 hf=bf;
 A=zeros(1,af);
@@ -71,42 +71,42 @@ H=zeros(1,hf);
 for st=1: 1 : trep
     
     % Simulation time parameters (DA CAMBIARE)
-simtime=86400;
-TH=zeros(1,simtime);
-TD=zeros(1,simtime);
-car_counterD = 0;
-car_counterH = 0;
-fluxD = zeros(1,24);
-fluxH = zeros(1,24);
-
-%time initialise
-m = 0;
-h = 0;
-d = 0;
+    simtime=86400;
+    TH=zeros(1,simtime);
+    TD=zeros(1,simtime);
+    car_counterD = 0;
+    car_counterH = 0;
+    fluxD = zeros(1,24);
+    fluxH = zeros(1,24);
+    
+    %time initialise
+    m = 0;
+    h = 0;
+    d = 0;
     
     
     % FIRST traffic light parameters
     timer1=0;
-    tg1 = 10*st;
+    tg1 = 1*st;
     tr1 = 40;
     ttot1 = 2*tg1+2*tr1;
     
     % SECOND traffic light parameters
     timer2=0;
-    tg2 = 10*st;
+    tg2 = 1*st;
     tr2 = 70;
     ttot2 = 2*tg2+2*tr2;
     
     %reset corsie
     A=zeros(1,af);
-B=zeros(1,bf);
-C=zeros(1,cf);
-D=zeros(1,df);
-E=zeros(1,ef);
-F=zeros(1,ff);
-G=zeros(1,gf);
-H=zeros(1,hf);
-
+    B=zeros(1,bf);
+    C=zeros(1,cf);
+    D=zeros(1,df);
+    E=zeros(1,ef);
+    F=zeros(1,ff);
+    G=zeros(1,gf);
+    H=zeros(1,hf);
+    
     
     
     for t=1:1:simtime
@@ -149,7 +149,7 @@ H=zeros(1,hf);
             G(1,length(G))=-1;
         end
         
-        %each car moves 2 space forward if possible
+        %each car moves 2 spaces forward if possible
         %FIRST SIDE
         A = MoveForward(A);
         A = MoveForward(A);
@@ -453,15 +453,29 @@ H=zeros(1,hf);
     b(2).LineWidth = 1.5;
     legend('flux to Bellinzona','flux to Goeschenen');
     %}
+    
     flux3D(st,:) = fluxD;
+    
     flux3H(st,:) = fluxH;
+    
+    iteration=st
     
 end
 figure
-    subplot(2,1,1);
-    mesh(flux3D);
-    subplot(2,1,2);
-    mesh(flux3H);
+subplot(2,1,1);
+mesh(flux3D);
+    xlabel('hours'),
+    ylabel('number of iterations');
+    zlabel('number of cars');
+    title('Flux of cars to Bellinzona');
+
+
+subplot(2,1,2);
+mesh(flux3H);
+    xlabel('hours'),
+    ylabel('number of iterations');
+    zlabel('number of cars');
+    title('Flux of cars to Goeschenen');
 
 
 %case per fare copia incolla
