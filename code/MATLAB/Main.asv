@@ -391,27 +391,27 @@ end
 figure
 subplot(2,1,1); % add first plot in 2 x 1 grid
 
-xD = 0:lxD -1;
-hp = area(xD,fluxD);
-hp(1).FaceColor = [0 .5 0];
-hp(1).LineWidth = 1;
+xD = 0:lxD;
+hb = area(xD,fluxD);
+hb(1).FaceColor = [0 .5 0];
+hb(1).LineWidth = 1;
 title('Flux of cars to Bellinzona');
 xlabel('hours');
 ylabel('number of cars');
 
 % fluxH represents the flux of cars through H
 subplot(2,1,2);% add second plot in 2 x 1 gri
-xH = 0:lxH-1;
-dp = area(xH,fluxH);
-dp(1).FaceColor = [0.7843 0.7843 0.0392];
-dp(1).LineWidth = 1.5;
+xH = 0:lxH;
+d = area(xH,fluxH);
+d(1).FaceColor = [0.7843 0.7843 0.0392];
+d(1).LineWidth = 1.5;
 title('Flux of cars to Goeschenen');
 xlabel('hours');
 ylabel('number of cars');
 
 figure
 % confront fluxes
-y = zeros(lxD,2);
+y = zeros(25,2);
 y(:,1) = fluxD(1,:);
 y(:,2) = fluxH(1,:);
 b = bar(y);
