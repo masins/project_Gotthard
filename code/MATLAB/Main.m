@@ -45,8 +45,8 @@ TH=zeros(1,simtime);
 TD=zeros(1,simtime);
 car_counterD = 0;
 car_counterH = 0;
-fluxD = zeros(1,49);
-fluxH = zeros(1,49);
+fluxD = zeros(1,25);
+fluxH = zeros(1,25);
 
 
 % set lines:
