@@ -95,23 +95,23 @@ for t=1:1:simtime
     
     
     %move car to the new section after finish C --> E
-    if C(1,length(C))==1
+    if C(1,length(C))==1 && E(1,1) == 0
         C(1,length(C))= 0;
         E(1,1)=1;
     end
     %move car to the new section after finish F --> H
-    if F(1,length(F))==1
+    if F(1,length(F))==1 && H(1,1) == 0
         F(1,length(F))= 0;
         H(1,1)=1;
     end
     
     %move car to the new section after finish C --> D
-    if C(1,1)==-1
+    if C(1,1)==-1 && D(1,length(D))== 0
         C(1,1)= 0;
         D(1,length(D))=-1;
     end
     %move car to the new section after finish F --> G
-    if F(1,1)==-1
+    if F(1,1)==-1 && G(1,length(G))== 0
         F(1,1)= 0;
         G(1,length(G))=-1;
     end

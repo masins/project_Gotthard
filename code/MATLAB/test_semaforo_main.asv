@@ -40,7 +40,7 @@ tr2 = 70;
 ttot2 = 2*tg2+2*tr2;
 
 %number of repetitions of simulation
-trep = 5;
+trep = 2600;
 flux3D= zeros(trep,24);
 flux3H= zeros(trep,24);
 
@@ -87,13 +87,13 @@ for st=1: 1 : trep
     
     % FIRST traffic light parameters
     timer1=0;
-    tg1 = 60*st;
+    tg1 = 1*st;
     tr1 = 40;
     ttot1 = 2*tg1+2*tr1;
     
     % SECOND traffic light parameters
     timer2=0;
-    tg2 = 60*st;
+    tg2 = 1*st;
     tr2 = 70;
     ttot2 = 2*tg2+2*tr2;
     
@@ -144,7 +144,7 @@ for st=1: 1 : trep
             D(1,length(D))=-1;
         end
         %move car to the new section after finish F --> G
-        if F(1,1)==-1 && G(1,length(G))== 0
+        if F(1,1)==-1 
             F(1,1)= 0;
             G(1,length(G))=-1;
         end
