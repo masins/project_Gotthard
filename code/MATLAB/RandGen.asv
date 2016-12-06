@@ -2,7 +2,7 @@
 function Y =  RandGen(R)
 Y = zeros(24,3600);
 
-for d=1 : 1 
+for d=0 : 1 :2
     for h=1:1:24
 
         tot = 3600;
@@ -13,8 +13,9 @@ for d=1 : 1
 
         X = X(randperm(tot));
 
-        Y(h,:)=X;
+        Y(24*(d-1)+h,:)=X;
     end
+end
 
 
 end

@@ -8,27 +8,30 @@
 %F: double line second side
 %H: free line from left to right second side
 %
+%Göschenen                                                       Bellinzona
 % ---------------_____________-------------------____________--------------
 %    <<Line D<<                    <<Line G<<                  <<Line B<<
 % --------------- <<Line C>>  ------------------- <<Line F>> --------------
 %    >>Line A>>  _____________     >>Line E>>    ____________  >>Line H>>
 % ---------------             ------------------             --------------
-%
+%                ligth n. 1                       ligth n. 2
 
 %time initialise
-m = 0;
-h = 0;
-d = 0;
+m = 0;      %minute
+h = 0;      %houar
+d = 0;      %day
 
 %data from excel file
+%numbero f car per hour in direction Bellinzona
 numr1 = xlsread('Copia_di_Dati2015Gottardo(2830).xlsx',2,'F45:AC47');
 R1=round(numr1);
-
+%numbero f car per hour in direction Göschenen
 numr2 = xlsread('Copia_di_Dati2015Gottardo(2830).xlsx',3,'F45:AC47');
 R2=round(numr1);
-
+%Random matrix for crating car (more in the RandGen function)
 MR1 = RandGen(R1);
 MR2 = RandGen (R2);
+
 % FIRST traffic light parameters
 timer1=0;
 tg1 = 30;
@@ -44,6 +47,8 @@ ttot2 = 2*tg2+2*tr2;
 % Simulation time parameters (DA CAMBIARE)
 nd= 1;           %number of day
 simtime=86400 * nd - 1; %-1 so the simulation finish at 23h 59m 59s of the day set
+
+%data acuire parameter initialisation
 TH=zeros(1,simtime);
 TD=zeros(1,simtime);
 car_counterD = 0;
@@ -96,6 +101,7 @@ for t=1:1:simtime
     end
     
     
+    
     %move car to the new section after finish C --> E
     if C(1,length(C))==1 && E(1,1) == 0
         C(1,length(C))= 0;
@@ -118,8 +124,7 @@ for t=1:1:simtime
         G(1,length(G))=-1;
     end
     
-    %each car moves 2 space forward if possible
-    %FIRST SIDE
+    %each car moves 2 space in the rigth direction if possible
     A = MoveForward(A);
     A = MoveForward(A);
     E = MoveForward(E);
@@ -144,7 +149,7 @@ for t=1:1:simtime
     
     
     
-    % new car enters A line each hour
+    % new car enters A line accodingi to the random matrix
     if MR1(24*(d)+h+1, mod(t,3600)+1) == 1
         A = CreateForward(A);
         
@@ -153,8 +158,6 @@ for t=1:1:simtime
     else
         error('Error. \nproblem crating car line A a time %d',t);
     end
-    
-    
     % with switch case
     %{
     switch h
@@ -260,7 +263,7 @@ for t=1:1:simtime
     end
     %}
     
-    % new car enters B line each hour
+    % new car enters B line accodingi to the random matrix
     if MR2(24*(d)+h+1, mod(t,3600)+1) == 1
         B = CreateBackward(B);
         
@@ -269,7 +272,6 @@ for t=1:1:simtime
     else
         error('Error. \nproblem crating car line B a time %d',t);
     end
-    
     % with switch case
     %{
     switch h
@@ -376,7 +378,8 @@ for t=1:1:simtime
     end
     %}
     
-    %traffic light
+    
+    %traffic lights
     [A, G, C, timer1] = TrafficLight(A, G, C, timer1, tg1, tr1, ttot1);
     [E, B, F, timer2] = TrafficLight(E, B, F, timer2, tg2, tr2, ttot2);
     
