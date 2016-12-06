@@ -1,14 +1,16 @@
 
 function TestCrash(X)
+
 testright = all(X>=0);
 testleft = all(X<=0);
 
-if ~(xor(testright, testleft)
+if (testright || testleft) == 0
     error('Error car in same line with opposit direction');   
 end
-
+%}
 %{
-
+testright = 0;
+testleft = 0;
 
 % check that there are care in any direction
 for i=1:1:length(X)

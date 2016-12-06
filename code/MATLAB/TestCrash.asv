@@ -3,8 +3,8 @@ function TestCrash(X)
 testright = all(X>=0);
 testleft = all(X<=0);
 
-if ~(xor(testright, testleft
-    
+if (testright  testleft
+    error('Error car in same line with opposit direction');   
 end
 
 %{
