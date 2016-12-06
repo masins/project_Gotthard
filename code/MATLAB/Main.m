@@ -8,7 +8,7 @@
 %F: double line second side
 %H: free line from left to right second side
 %
-%Göschenen                                                       Bellinzona
+%G?schenen                                                       Bellinzona
 % ---------------_____________-------------------____________--------------
 %    <<Line D<<                    <<Line G<<                  <<Line B<<
 % --------------- <<Line C>>  ------------------- <<Line F>> --------------
@@ -20,12 +20,15 @@
 m = 0;      %minute
 h = 0;      %houar
 d = 0;      %day
+tstart = 54000; %time when the test car is created
+timingForward = 0; %time a car needs to run through all lines
+timingBackward = 0; %time a car needs to run through all lines
 
 %data from excel file
 %numbero f car per hour in direction Bellinzona
 numr1 = xlsread('Copia_di_Dati2015Gottardo(2830).xlsx',2,'F45:AC47');
 R1=round(numr1);
-%numbero f car per hour in direction Göschenen
+%numbero f car per hour in direction G?schenen
 numr2 = xlsread('Copia_di_Dati2015Gottardo(2830).xlsx',3,'F45:AC47');
 R2=round(numr1);
 %Random matrix for crating car (more in the RandGen function)
@@ -146,7 +149,19 @@ for t=1:1:simtime
     F = MoveBackward(F);
     F = MoveBackward(F);
     
-    
+    % create test car with value either +2 or -2, depending on the direction
+    if t == tstart
+        if A(1,1)==0
+            A(1,1)=2;
+        elseif A(1,1) == 1
+            A(1,1) = 2;
+        end
+        if B(1,length(B))==0
+             B(1,length(B))=-2;
+        elseif B(1,length(B)) == -1
+            B(1,length(B)) = -2;
+        end
+    end
     
     
     % new car enters A line accodingi to the random matrix
@@ -390,6 +405,12 @@ for t=1:1:simtime
         D(1,1)=0;
         TD(1,t)=-1;
         car_counterD = car_counterD + 1;
+    elseif D(1,1) == -2
+        D(1,1)=0;
+        TD(1,t)=-1;
+        car_counterD = car_counterD + 1;
+        timingBackward = t - tstart;
+        
     end
     
     %empting H and plotting what is going out
@@ -399,6 +420,11 @@ for t=1:1:simtime
         H(1,length(H)) = 0;
         TH(1,t)=1;
         car_counterH = car_counterH +1;
+    elseif H(1,length(H)) == 2
+        H(1,length(H)) = 0;
+        TH(1,t)=1;
+        car_counterH = car_counterH +1;
+        timingForward = t - tstart;
     end
     
     %Plotting things
