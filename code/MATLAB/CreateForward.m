@@ -7,16 +7,19 @@
 %ERROR:     If the line contai numbers that are not 0 or 1
 
 
-function y = CreateForward(X)
-
+function y = CreateForward(X,n)
+if n<=0
+    error('Error. Cratingo a negativ or 0 car forward');
+end
+    
 for i = 1:1:length(X)
-    if((X(1,i) ~= 0) && ((X(1,i)~= 1) && X(1,i)~= 2))
+    if X(1,i) < 0
         error('Error. \nThe create Forward line have a wrong value at (1,%d)',i);
     end
 end
 
 if X(1,1)==0
-    X(1,1)=1;
+    X(1,1)=n;
 end
 y=X;
 end

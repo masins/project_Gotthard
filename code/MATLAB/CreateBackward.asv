@@ -8,12 +8,12 @@
 
 function y = CreateBackward(X,n)
 
-if n>=0
+if n<=0
     error('Error. Cratingo a positiv or 0 car Backward');
 end
 
 for i = 1:1:length(X)
-    if X(1,i) > 0
+    if((X(1,i) ~= 0) && ((X(1,i)~= -1) && X(1,i)~= -2))
         error('Error. \nThe move backward line have a wrong value at (1,%d)',i);
     end
 end

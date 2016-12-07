@@ -34,8 +34,9 @@ R2=round(numr1);
 %Random matrix for crating car (more in the RandGen function)
 MR1 = RandGen(R1);
 MR2 = RandGen (R2);
-nr1 = 0;
-nr2 = 0;
+%initialaising the car number
+nr1 = 1;
+nr2 = -1;
 
 % FIRST traffic light parameters
 timer1=0;
@@ -202,7 +203,7 @@ for t=1:1:simtime
     % new car enters A line accodingi to the random matrix
     if MR1(1, 86400*(d)+h*3600+mod(t,3600)+1) == 1
         nr1 = nr1 + 1;
-        A = CreateForward(A);
+        A = CreateForward(A,nr1);
         MR1(1, 86400*(d)+h*3600+mod(t,3600)+1)= nr1;
         
     elseif MR1(1, 86400*(d)+h*3600+mod(t,3600)+1) == 0
@@ -330,8 +331,8 @@ for t=1:1:simtime
     
     % new car enters B line accodingi to the random matrix
      if MR2(86400*(d)+h*3600+mod(t,3600)+1) == 1
-         nr2 = nr2 + 1;
-        B = CreateBackward(B);
+         nr2 = nr2 - 1;
+        B = CreateBackward(B,nr2);
         MR2(86400*(d)+h*3600+mod(t,3600)+1) = nr2;
         
     elseif MR2(1, 86400*(d)+h*3600+mod(t,3600)+1) == 0

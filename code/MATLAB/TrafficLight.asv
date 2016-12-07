@@ -66,7 +66,7 @@ if(mod(t,ttot) > 0 && mod(t,ttot) <= tg)
     end
 elseif((mod(t,ttot)>(tg+tr)) && (mod(t,ttot)<=(2*tg+tr)))
     if(nR(1,1) < 0) && (nC(1, length(nC)) ==0)
-        nC = CreateBackward(nC,nR(1,1));
+        nC = CreateBackward(nC);
         nR(1,1)=0;
     end
 end
