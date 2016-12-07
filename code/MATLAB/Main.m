@@ -493,6 +493,19 @@ for t=1:1:simtime
     
 end
 
+%maxing array with time op percorenza passo fo each car(first car has
+%number 2)
+%direction Bellinzona
+TxH = zeros(1, max(TH));
+for i=2 : 1 : max (TH)
+    TxH(1,i) = (find(TH==i,1) - find(MR1==i,1));
+end
+%direction Goeschenen
+TxD = zeros(1, abs(min(TD)));
+for i=-2 : -1 : min (TD)
+    TxD(1,abs(i)) = (find(TD==i,1) - find(MR2==i,1));
+end
+
 % PLOTS
 % fluxD represents the flux of cars through D
 figure
@@ -517,6 +530,7 @@ xlabel('hours');
 ylabel('number of cars');
 
 figure
+
 % confront fluxes
 y = zeros(lxD,2);
 y(:,1) = fluxD(1,:);
@@ -527,3 +541,18 @@ b(1).LineWidth = 1.5;
 b(2).FaceColor = [0.7843 0.7843 0.0392];
 b(2).LineWidth = 1.5;
 legend('flux to Bellinzona','flux to Goeschenen');
+
+
+% plot of how much time dase it take to pass the pass
+figure
+subplot(2,1,1);
+area (TxH);
+title('Time to arrive in Airolo from Goeschenen');
+xlabel('Car Number');
+ylabel('time to go through the pass [s]');
+
+subplot(2,1,2);
+area (TxD);
+title('Time to arrive in Goeschenen from Airolo');
+xlabel('Car Number * (-1)');
+ylabel('time to go through the pass [s]');
