@@ -27,20 +27,23 @@ R1=round(numr1);
 numr2 = xlsread('Copia_di_Dati2015Gottardo(2830).xlsx',3,'F45:AC47');
 R2=round(numr1);
 
+
+MR1 = RandGen(R1);
+MR2 = RandGen (R2);
 % FIRST traffic light parameters
 timer1=0;
-tg1 = 0;
-tr1 = 40;
+tg1 = 10;
+tr1 = 70;
 ttot1 = 2*tg1+2*tr1;
 
 % SECOND traffic light parameters
 timer2=0;
-tg2 = 0;
+tg2 = 10;
 tr2 = 70;
 ttot2 = 2*tg2+2*tr2;
 
 %number of repetitions of simulation
-trep = 5;
+trep = 3;
 flux3D= zeros(trep,24);
 flux3H= zeros(trep,24);
 
@@ -71,7 +74,10 @@ H=zeros(1,hf);
 for st=1: 1 : trep
     
     % Simulation time parameters (DA CAMBIARE)
-    simtime=86400;
+    % Simulation time parameters (DA CAMBIARE)
+    nd= 1;           %number of day
+    simtime=86400 * nd - 1; %-1 so the simulation finish at 23h 59m 59s of the day set
+
     TH=zeros(1,simtime);
     TD=zeros(1,simtime);
     car_counterD = 0;
@@ -87,13 +93,13 @@ for st=1: 1 : trep
     
     % FIRST traffic light parameters
     timer1=0;
-    tg1 = 60*st;
-    tr1 = 40;
+    tg1 = 30*st;
+    tr1 = 70;
     ttot1 = 2*tg1+2*tr1;
     
     % SECOND traffic light parameters
     timer2=0;
-    tg2 = 60*st;
+    tg2 = 30*st;
     tr2 = 70;
     ttot2 = 2*tg2+2*tr2;
     
@@ -174,8 +180,21 @@ for st=1: 1 : trep
         
         
         % new car enters A line each hour
-        % with switch case
+    if MR1(24*(d)+h+1, mod(t,3600)+1) == 1
+        A = CreateForward(A);
         
+    elseif MR1(24*(d)+h+1, mod(t,3600)+1) == 0
+        
+    else
+        error('Error. \nproblem crating car line A a time %d',t);
+    end
+        
+        
+        
+        % new car enters A line each hour
+        % with switch case
+     
+       %{ 
         switch h
             case 0
                 if mod(t,R1(d+1,h+1)) == 0
@@ -278,11 +297,23 @@ for st=1: 1 : trep
                 error('Error. \nIncorrect value for variable h (hour) = %d: h must be between 0 and 23',h);
                 
         end
+        %}
+        
+        % new car enters B line each hour
+    if MR2(24*(d)+h+1, mod(t,3600)+1) == 1
+        B = CreateBackward(B);
+        
+    elseif MR2(24*(d)+h+1, mod(t,3600)+1) == 0
+        
+    else
+        error('Error. \nproblem crating car line B a time %d',t);
+    end
+        
         
         
         % new car enters B line each hour
         % with switch case
-        
+        %{
         switch h
             case 0
                 if mod(t,R2(d+1,h+1)) == 0
@@ -386,7 +417,7 @@ for st=1: 1 : trep
                 
         end
         
-        
+        %}
         %traffic light
         [A, G, C, timer1] = TrafficLight(A, G, C, timer1, tg1, tr1, ttot1);
         [E, B, F, timer2] = TrafficLight(E, B, F, timer2, tg2, tr2, ttot2);

@@ -109,22 +109,46 @@ for t=1:1:simtime
     if C(1,length(C))==1 && E(1,1) == 0
         C(1,length(C))= 0;
         E(1,1)=1;
+    elseif C(1,length(C))==2  && E(1,1) == 0
+        C(1,length(C))= 0;
+        E(1,1)=2;
+        elseif C(1,length(C))==0 || C(1,length(C))==-1 || C(1,length(C))==-2
+    else
+        error('qualcosa non funzione nel movimento automatico');
     end
     %move car to the new section after finish F --> H
     if F(1,length(F))==1 && H(1,1) == 0
         F(1,length(F))= 0;
         H(1,1)=1;
+    elseif F(1,length(F))==2 && H(1,1) == 0
+        F(1,length(F))= 0;
+        H(1,1)=2;
+    elseif F(1,length(F))==0 || F(1,length(F))==-1 || F(1,length(F))==-2
+    else
+        error('qualcosa non funzione nel movimento automatico');
     end
     
     %move car to the new section after finish C --> D
     if C(1,1)==-1 && D(1,length(D))== 0
         C(1,1)= 0;
         D(1,length(D))=-1;
+    elseif C(1,1)==-2 && D(1,length(D))== 0
+        C(1,1)= 0;
+        D(1,length(D))=-2;
+    elseif C(1,1)==0|| C(1,1)==1 || C(1,1)==2
+    else
+        error('qualcosa non funzione nel movimento automatico');
     end
     %move car to the new section after finish F --> G
     if F(1,1)==-1 && G(1,length(G))== 0
         F(1,1)= 0;
         G(1,length(G))=-1;
+    elseif F(1,1)==-2 && G(1,length(G))== 0
+        F(1,1)= 0;
+        G(1,length(G))=-2;
+    elseif F(1,1)==0 || F(1,1)==1 || F(1,1)==2
+    else
+        error('qualcosa non funzione nel movimento automatico');
     end
     
     %each car moves 2 space in the rigth direction if possible
@@ -150,6 +174,7 @@ for t=1:1:simtime
     F = MoveBackward(F);
     
     % create test car with value either +2 or -2, depending on the direction
+    %{
     if t == tstart
         if A(1,1)==0
             A(1,1)=2;
@@ -162,7 +187,7 @@ for t=1:1:simtime
             B(1,length(B)) = -2;
         end
     end
-    
+    %}
     
     % new car enters A line accodingi to the random matrix
     if MR1(24*(d)+h+1, mod(t,3600)+1) == 1

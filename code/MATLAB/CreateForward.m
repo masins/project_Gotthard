@@ -10,7 +10,7 @@
 function y = CreateForward(X)
 
 for i = 1:1:length(X)
-    if((X(1,i) ~= 0) && ((X(1,i)~= 1) || X(1,i)~= 2))
+    if((X(1,i) ~= 0) && ((X(1,i)~= 1) && X(1,i)~= 2))
         error('Error. \nThe move Forward line have a wrong value at (1,%d)',i);
     end
 end
