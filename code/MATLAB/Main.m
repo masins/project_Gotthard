@@ -8,7 +8,7 @@
 %F: double line second side
 %H: free line from left to right second side
 %
-%G?schenen                                                       Bellinzona
+%Goeschenen                                                      Bellinzona
 % ---------------_____________-------------------____________--------------
 %    <<Line D<<                    <<Line G<<                  <<Line B<<
 % --------------- <<Line C>>  ------------------- <<Line F>> --------------
@@ -34,6 +34,8 @@ R2=round(numr1);
 %Random matrix for crating car (more in the RandGen function)
 MR1 = RandGen(R1);
 MR2 = RandGen (R2);
+nr1 = 0;
+nr2 = 0;
 
 % FIRST traffic light parameters
 timer1=0;
@@ -106,49 +108,57 @@ for t=1:1:simtime
     
     
     %move car to the new section after finish C --> E
-    if C(1,length(C))==1 && E(1,1) == 0
+    if (C(1,length(C))>0) && (E(1,1) == 0)
+        E(1,1)=C(1,length(C));
         C(1,length(C))= 0;
-        E(1,1)=1;
+    %{
     elseif C(1,length(C))==2  && E(1,1) == 0
         C(1,length(C))= 0;
         E(1,1)=2;
         elseif C(1,length(C))==0 || C(1,length(C))==-1 || C(1,length(C))==-2
     else
         error('qualcosa non funzione nel movimento automatico');
+        %}
     end
     %move car to the new section after finish F --> H
-    if F(1,length(F))==1 && H(1,1) == 0
+    if (F(1,length(F))>0) && (H(1,1) == 0)
+        H(1,1)=F(1,length(F));
         F(1,length(F))= 0;
-        H(1,1)=1;
+    %{
     elseif F(1,length(F))==2 && H(1,1) == 0
         F(1,length(F))= 0;
         H(1,1)=2;
     elseif F(1,length(F))==0 || F(1,length(F))==-1 || F(1,length(F))==-2
     else
         error('qualcosa non funzione nel movimento automatico');
+        %}
     end
     
     %move car to the new section after finish C --> D
-    if C(1,1)==-1 && D(1,length(D))== 0
+    if (C(1,1)<0) && (D(1,length(D))== 0)
+        D(1,length(D))=C(1,1);
         C(1,1)= 0;
-        D(1,length(D))=-1;
+    %{
     elseif C(1,1)==-2 && D(1,length(D))== 0
         C(1,1)= 0;
         D(1,length(D))=-2;
     elseif C(1,1)==0|| C(1,1)==1 || C(1,1)==2
     else
         error('qualcosa non funzione nel movimento automatico');
+        %}
     end
     %move car to the new section after finish F --> G
-    if F(1,1)==-1 && G(1,length(G))== 0
+    if (F(1,1)<0) && (G(1,length(G))== 0)
+        G(1,length(G))=F(1,1);
         F(1,1)= 0;
-        G(1,length(G))=-1;
+    %{
     elseif F(1,1)==-2 && G(1,length(G))== 0
         F(1,1)= 0;
         G(1,length(G))=-2;
     elseif F(1,1)==0 || F(1,1)==1 || F(1,1)==2
     else
         error('qualcosa non funzione nel movimento automatico');
+        %}
     end
     
     %each car moves 2 space in the rigth direction if possible
@@ -190,6 +200,19 @@ for t=1:1:simtime
     %}
     
     % new car enters A line accodingi to the random matrix
+    if MR1(1, 86400*(d)+h*3600+mod(t,3600)+1) == 1
+        nr1 = nr1 + 1;
+        A = CreateForward(A);
+        MR1(1, 86400*(d)+h*3600+mod(t,3600)+1)= nr1;
+        
+    elseif MR1(1, 86400*(d)+h*3600+mod(t,3600)+1) == 0
+        
+    else
+        error('Error. \nproblem crating car line A a time %d',t);
+    end
+    
+    %with old RandGen
+    %{
     if MR1(24*(d)+h+1, mod(t,3600)+1) == 1
         A = CreateForward(A);
         
@@ -198,6 +221,8 @@ for t=1:1:simtime
     else
         error('Error. \nproblem crating car line A a time %d',t);
     end
+    %}
+    
     % with switch case
     %{
     switch h
@@ -304,6 +329,20 @@ for t=1:1:simtime
     %}
     
     % new car enters B line accodingi to the random matrix
+     if MR2(86400*(d)+h*3600+mod(t,3600)+1) == 1
+         nr2 = nr2 + 1;
+        B = CreateBackward(B);
+        MR2(86400*(d)+h*3600+mod(t,3600)+1) = nr2;
+        
+    elseif MR2(1, 86400*(d)+h*3600+mod(t,3600)+1) == 0
+        
+    else
+        error('Error. \nproblem crating car line B a time %d',t);
+    end
+    
+    
+    %with old RandGen
+    %{
     if MR2(24*(d)+h+1, mod(t,3600)+1) == 1
         B = CreateBackward(B);
         
@@ -312,6 +351,8 @@ for t=1:1:simtime
     else
         error('Error. \nproblem crating car line B a time %d',t);
     end
+    %}
+    
     % with switch case
     %{
     switch h
@@ -426,30 +467,19 @@ for t=1:1:simtime
     %empting D and plotting what is going out
     if D(1,1) == 0
         TD(1,t)=0;
-    elseif D(1,1)==-1
+    elseif D(1,1)< 0
+        TD(1,t)=D(1,1);
         D(1,1)=0;
-        TD(1,t)=-1;
-        car_counterD = car_counterD + 1;
-    elseif D(1,1) == -2
-        D(1,1)=0;
-        TD(1,t)=-1;
-        car_counterD = car_counterD + 1;
-        timingBackward = t - tstart;
-        
+        car_counterD = car_counterD + 1;        
     end
     
     %empting H and plotting what is going out
     if H(1,length(H)) == 0
         TH(1,t)=0;
-    elseif H(1,length(H)) == 1
+    elseif H(1,length(H)) > 0
+        TH(1,t)=H(1,length(H));
         H(1,length(H)) = 0;
-        TH(1,t)=1;
         car_counterH = car_counterH +1;
-    elseif H(1,length(H)) == 2
-        H(1,length(H)) = 0;
-        TH(1,t)=1;
-        car_counterH = car_counterH +1;
-        timingForward = t - tstart;
     end
     
     %Plotting things

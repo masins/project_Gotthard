@@ -60,12 +60,12 @@ end
 
 % traffic light is GREEN either on the left or on the right
 if(mod(t,ttot) > 0 && mod(t,ttot) <= tg)
-    if(nL(1,length(nL)) == 1)
+    if(nL(1,length(nL)) > 0) && (nC(1,1) == 0)
         nC = CreateForward(nC);
         nL(1, length(nL)) = 0;
     end
 elseif((mod(t,ttot)>(tg+tr)) && (mod(t,ttot)<=(2*tg+tr)))
-    if(nR(1,1)==-1)
+    if(nR(1,1) < 0) && (nC(1, length(nC)) ==0)
         nR(1,1)=0;
         nC = CreateBackward(nC);
     end

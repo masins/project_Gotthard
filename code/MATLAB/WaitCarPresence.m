@@ -11,11 +11,11 @@ function y = WaitCarPresence(Line)
  
 y=0;
 
-if Line(1,length(Line)) == 1 || Line(1,length(Line)) == 2
+if Line(1,length(Line)) > 0
     y=1;
 end
 
-if Line(1,1) == -1 || Line(1,1) == -2
+if Line(1,1) < 0
     y=-1;
 end
 
