@@ -19,12 +19,7 @@ for i = 1:1:length(X)
 end
 
 if X(1,1)==0
-    if wl(1,length(wl)) == 0
     X(1,1)=n;
-    elseif wl(1,length(wl)) > 0
-        X(1,1)
-    end
-    
 else
     errordlg('Linea piena Create Forward');
     error('see dialog box');

@@ -38,8 +38,8 @@ MR2 = RandGen (R2);
 nr1 = 1;
 nr2 = -1;
 %initialisating wait list
-wr1 = 0;
-wr2 = 0;
+wr1 = CQueue();
+wr2 = CQueue();
 
 
 % FIRST traffic light parameters
