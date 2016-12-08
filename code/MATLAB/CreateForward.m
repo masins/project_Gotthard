@@ -20,6 +20,8 @@ end
 
 if X(1,1)==0
     X(1,1)=n;
+else
+    error('Linea piena');
 end
 y=X;
 end

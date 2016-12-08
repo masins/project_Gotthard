@@ -69,8 +69,8 @@ fluxH = zeros(1,lxH);
 % set lenght
 % initially void
 % a space is 5 meter
-af=250;
-bf=250;
+af=100;
+bf=100;
 cf=78;
 df=af;
 ef=136;
@@ -330,7 +330,7 @@ for t=1:1:simtime
     %}
     
     % new car enters B line accodingi to the random matrix
-     if MR2(86400*(d)+h*3600+mod(t,3600)+1) == 1
+     if MR2(1,86400*(d)+h*3600+mod(t,3600)+1) == 1
          nr2 = nr2 - 1;
         B = CreateBackward(B,nr2);
         MR2(86400*(d)+h*3600+mod(t,3600)+1) = nr2;
