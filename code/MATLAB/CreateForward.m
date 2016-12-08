@@ -7,9 +7,11 @@
 %ERROR:     If the line contai numbers that are not 0 or 1
 
 
-function [y, nwl] = CreateForward(X,n,wl)
+function y = CreateForward(X,n, wl)
 if n<=0
     error('Error. Creatingo a negativ or 0 car forward');
+else
+    wl.push(n);
 end
     
 for i = 1:1:length(X)
@@ -19,15 +21,9 @@ for i = 1:1:length(X)
 end
 
 if X(1,1)==0
-    if wl(1,length(wl)) == 0
-    X(1,1)=n;
-    elseif wl(1,length(wl)) > 0
-        X(1,1)
-    end
-    
-else
-    errordlg('Linea piena Create Forward');
-    error('see dialog box');
+        X(1,1)=wl.pop();
+%else
+%    errordlg('Linea piena Create Forward');
 end
 y=X;
 end

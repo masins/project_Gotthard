@@ -12,7 +12,7 @@
 % nt = new timer
 %
 %
-function [nL,nR,nC,nt] = TrafficLight(L,R,C,t,tg,tr, ttot)
+function [nL,nR,nC,nt] = TrafficLight(L,R,C,t,tg,tr, ttot, wl)
 
 nL = L;
 nR = R;
@@ -61,12 +61,12 @@ end
 % traffic light is GREEN either on the left or on the right
 if(mod(t,ttot) > 0 && mod(t,ttot) <= tg)
     if(nL(1,length(nL)) > 0) && (nC(1,1) == 0)
-        nC = CreateForward(nC,nL(1, length(nL)));
+        nC = CreateForward(nC,nL(1, length(nL)),wl);
         nL(1, length(nL)) = 0;
     end
 elseif((mod(t,ttot)>(tg+tr)) && (mod(t,ttot)<=(2*tg+tr)))
     if(nR(1,1) < 0) && (nC(1, length(nC)) ==0)
-        nC = CreateBackward(nC,nR(1,1));
+        nC = CreateBackward(nC,nR(1,1),wl);
         nR(1,1)=0;
     end
 end

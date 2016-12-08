@@ -47,13 +47,14 @@ timer1=0;
 tg1 = 30;
 tr1 = 40;
 ttot1 = 2*tg1+2*tr1;
+wl1 = CQueue();
 
 % SECOND traffic light parameters
 timer2=0;
 tg2 = 30;
 tr2 = 70;
 ttot2 = 2*tg2+2*tr2;
-
+wl2 = CQueue();
 % Simulation time parameters (DA CAMBIARE)
 nd= 1;           %number of day
 simtime=86400 * nd - 1; %-1 so the simulation finish at 23h 59m 59s of the day set
@@ -205,9 +206,11 @@ for t=1:1:simtime
     %}
     
     % new car enters A line accodingi to the random matrix
+    %emptying the queue
+    A = EmtingQueueForward(A,wr1);
     if MR1(1, 86400*(d)+h*3600+mod(t,3600)+1) == 1
         nr1 = nr1 + 1;
-        A = CreateForward(A,nr1);
+        A = CreateForward(A,nr1, wr1);
         MR1(1, 86400*(d)+h*3600+mod(t,3600)+1)= nr1;
         
     elseif MR1(1, 86400*(d)+h*3600+mod(t,3600)+1) == 0
@@ -334,10 +337,12 @@ for t=1:1:simtime
     %}
     
     % new car enters B line accodingi to the random matrix
+    %emptyng the queue
+    B = EmtingQueueBackward(B,wr2);
      if MR2(1,86400*(d)+h*3600+mod(t,3600)+1) == 1
          nr2 = nr2 - 1;
-        B = CreateBackward(B,nr2);
-        MR2(86400*(d)+h*3600+mod(t,3600)+1) = nr2;
+        B = CreateBackward(B,nr2,wr2);
+        MR2(1,86400*(d)+h*3600+mod(t,3600)+1) = nr2;
         
     elseif MR2(1, 86400*(d)+h*3600+mod(t,3600)+1) == 0
         
@@ -466,8 +471,8 @@ for t=1:1:simtime
     
     
     %traffic lights
-    [A, G, C, timer1] = TrafficLight(A, G, C, timer1, tg1, tr1, ttot1);
-    [E, B, F, timer2] = TrafficLight(E, B, F, timer2, tg2, tr2, ttot2);
+    [A, G, C, timer1] = TrafficLight(A, G, C, timer1, tg1, tr1, ttot1, wl1);
+    [E, B, F, timer2] = TrafficLight(E, B, F, timer2, tg2, tr2, ttot2, wl2);
     
     %empting D and plotting what is going out
     if D(1,1) == 0
@@ -519,7 +524,7 @@ xD = 0:lxD -1;
 hp = area(xD,fluxD);
 hp(1).FaceColor = [0 .5 0];
 hp(1).LineWidth = 1;
-title('Flux of cars to Bellinzona');
+title('Flux of cars to Goeschenen');
 xlabel('hours');
 ylabel('number of cars');
 
@@ -529,7 +534,7 @@ xH = 0:lxH-1;
 dp = area(xH,fluxH);
 dp(1).FaceColor = [0.7843 0.7843 0.0392];
 dp(1).LineWidth = 1.5;
-title('Flux of cars to Goeschenen');
+title('Flux of cars to Airolo');
 xlabel('hours');
 ylabel('number of cars');
 
@@ -544,7 +549,7 @@ b(1).FaceColor = [0 .5 0];
 b(1).LineWidth = 1.5;
 b(2).FaceColor = [0.7843 0.7843 0.0392];
 b(2).LineWidth = 1.5;
-legend('flux to Bellinzona','flux to Goeschenen');
+legend('flux to Goeschenen','flux to Airolo');
 
 
 % plot of how much time dase it take to pass the pass

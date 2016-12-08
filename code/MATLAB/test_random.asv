@@ -134,13 +134,13 @@ for st=1: 1 : trep
     
     % FIRST traffic light parameters
     timer1=0;
-    tg1 = 200+2*st;
+    tg1 = 20+5*st;
     tr1 = 40;
     ttot1 = 2*tg1+2*tr1;
     
     % SECOND traffic light parameters
     timer2=0;
-    tg2 = 200+2*st;
+    tg2 = 20+5*st;
     tr2 = 70;
     ttot2 = 2*tg2+2*tr2;
     
@@ -645,18 +645,18 @@ legend('flux to Bellinzona','flux to Goeschenen');
 figure
 subplot(2,1,1);
 mesh(Tx3D);
-xlabel('car number'),
-ylabel('number of iterations');
-zlabel('time to pass');
+xlabel('...'),
+ylabel('...');
+zlabel('...');
 title('Flux of cars to Goeschenen');
 
 
 subplot(2,1,2);
 mesh(Tx3H);
 xlabel('car number'),
-ylabel('number of iterations');
-zlabel('time to pass');
-title('Flux of cars to Bellinzona');
+ylabel('...');
+zlabel('...');
+title('Flux of cars to Goeschenen');
 
 
 %3D plot
