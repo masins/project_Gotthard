@@ -7,7 +7,7 @@
 %
 %ERROR:     If the line contai numbers that are not 0 or -1
 
-function [y,nwl] = CreateBackward(X,n,wl,test)
+function y,nwl = CreateBackward(X,n,wl,test)
 
 if n>=0
     error('Error. Cratingo a positiv or 0 car Backward');
@@ -19,18 +19,13 @@ for i = 1:1:length(X)
     end
 end
 
-if X(1,length(X))==0 
-    if wl(1,length(wl)) == 0
-        X(1,length(X))=n;
-    elseif wl(1,length(wl)) == 0
-        X(1,length(X))=n;
-    end
+if X(1,length(X))==0
+    X(1,length(X))=n;
 elseif (test == 1)
-    wl(1,length(wl)) = n;
     
-elseif ( test == 0)
 else
-   errordlg('Linea piena CreateBackward');%   error('see dialog box');
+   errordlg('Linea piena CreateBackward');
+   error('see dialog box');
 end
 y=X;
 end

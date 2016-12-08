@@ -37,6 +37,10 @@ MR2 = RandGen (R2);
 %initialaising the car number
 nr1 = 1;
 nr2 = -1;
+%initialisating wait list
+wr1 = 0;
+wr2 = 0;
+
 
 % FIRST traffic light parameters
 timer1=0;
