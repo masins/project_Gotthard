@@ -134,15 +134,17 @@ for st=1: 1 : trep
     
     % FIRST traffic light parameters
     timer1=0;
-    tg1 = 200+2*st;
+    tg1 = 10+5*st;
     tr1 = 40;
     ttot1 = 2*tg1+2*tr1;
+    wl1 = CQueue();
     
     % SECOND traffic light parameters
     timer2=0;
-    tg2 = 200+2*st;
+    tg2 = 10+5*st;
     tr2 = 70;
     ttot2 = 2*tg2+2*tr2;
+    wl2 = CQueue();
     
     %reset corsie
     A=zeros(1,af);

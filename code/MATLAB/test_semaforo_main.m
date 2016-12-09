@@ -43,7 +43,7 @@ tr2 = 70;
 ttot2 = 2*tg2+2*tr2;
 
 %number of repetitions of simulation
-trep = 3;
+trep = 5;
 flux3D= zeros(trep,24);
 flux3H= zeros(trep,24);
 
@@ -93,13 +93,13 @@ for st=1: 1 : trep
     
     % FIRST traffic light parameters
     timer1=0;
-    tg1 = 30*st;
+    tg1 = 10+5*st;
     tr1 = 70;
     ttot1 = 2*tg1+2*tr1;
     
     % SECOND traffic light parameters
     timer2=0;
-    tg2 = 30*st;
+    tg2 = 10+5*st;
     tr2 = 70;
     ttot2 = 2*tg2+2*tr2;
     
