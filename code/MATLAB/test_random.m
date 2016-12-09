@@ -23,9 +23,6 @@
 m = 0;      %minute
 h = 0;      %hour
 d = 0;      %day
-tstart = 54000; %time when the test car is created
-timingForward = 0; %time a car needs to run through all lines
-timingBackward = 0; %time a car needs to run through all lines
 
 %data from excel file
 %numbero f car per hour in direction Bellinzona
@@ -37,48 +34,16 @@ R2=round(numr1);
 %Random matrix for crating car (more in the RandGen function)
 MRR1 = RandGen(R1);
 MRR2 = RandGen (R2);
-%initialaising the car number
-nr1 = 1;
-nr2 = -1;
-
-% FIRST traffic light parameters
-timer1=0;
-tg1 = 10;
-tr1 = 40;
-ttot1 = 2*tg1+2*tr1;
-
-% SECOND traffic light parameters
-timer2=0;
-tg2 = 10;
-tr2 = 70;
-ttot2 = 2*tg2+2*tr2;
-
-%{
-% Simulation time parameters (DA CAMBIARE)
-nd= 1;           %number of day
-simtime=86400 * nd - 1; %-1 so the simulation finish at 23h 59m 59s of the day set
-
-
-%}
-%{
-%data acuire parameter initialisation
-TH=zeros(1,simtime);
-TD=zeros(1,simtime);
-car_counterD = 0;
-car_counterH = 0;
-lxD=24*nd;
-lxH=24*nd;
-fluxD = zeros(1,lxD);
-fluxH = zeros(1,lxH);
-%}
 
 %number of repetitions of simulation
-nd= 1;
+nd= 3;
+simtime=86400 * nd - 1; %-1 so the simulation finish at 23h 59m 59s of the day set
+
 trep = 5;
 flux3D= zeros(trep,nd*24);
 flux3H= zeros(trep,nd*24);
-Tx3H= zeros(st,5000);
-Tx3D= zeros(st,5000);
+Tx3H= zeros(trep,5000*nd);
+Tx3D= zeros(trep,5000*nd);
 
 
 % set lines:
@@ -93,21 +58,9 @@ ef=136;
 ff=100;
 gf=ef;
 hf=bf;
-A=zeros(1,af);
-B=zeros(1,bf);
-C=zeros(1,cf);
-D=zeros(1,df);
-E=zeros(1,ef);
-F=zeros(1,ff);
-G=zeros(1,gf);
-H=zeros(1,hf);
 
 for st=1: 1 : trep
     
-    % Simulation time parameters (DA CAMBIARE)
-    % Simulation time parameters (DA CAMBIARE)
-    nd= 1;           %number of day
-    simtime=86400 * nd - 1; %-1 so the simulation finish at 23h 59m 59s of the day set
     
     TH=zeros(1,simtime);
     TD=zeros(1,simtime);
@@ -134,14 +87,14 @@ for st=1: 1 : trep
     
     % FIRST traffic light parameters
     timer1=0;
-    tg1 = 10+5*st;
+    tg1 = 5+20*st;
     tr1 = 40;
     ttot1 = 2*tg1+2*tr1;
     wl1 = CQueue();
     
     % SECOND traffic light parameters
     timer2=0;
-    tg2 = 10+5*st;
+    tg2 = 5+20*st;
     tr2 = 70;
     ttot2 = 2*tg2+2*tr2;
     wl2 = CQueue();
@@ -284,123 +237,6 @@ for st=1: 1 : trep
             error('Error. \nproblem crating car line A a time %d',t);
         end
         
-        %with old RandGen
-        %{
-    if MR1(24*(d)+h+1, mod(t,3600)+1) == 1
-        A = CreateForward(A);
-        
-    elseif MR1(24*(d)+h+1, mod(t,3600)+1) == 0
-        
-    else
-        error('Error. \nproblem crating car line A a time %d',t);
-    end
-        %}
-        
-        % with switch case
-        %{
-    switch h
-        case 0
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 1
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 2
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 3
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 4
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 5
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 6
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 7
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 8
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 9
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 10
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 11
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 12
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 13
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 14
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 15
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 16
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 17
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 18
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 19
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 20
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 21
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 22
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        case 23
-            if mod(t,R1(d+1,h+1)) == 0
-                A = CreateForward(A);
-            end
-        otherwise
-            error('Error. \nIncorrect value for variable h (hour) = %d: h must be between 0 and 23',h);
-            
-    end
-        %}
-        
         % new car enters B line accodingi to the random matrix
         %emptyng the queue
         B = EmtingQueueBackward(B,wr2);
@@ -416,129 +252,15 @@ for st=1: 1 : trep
         end
         
         
-        %with old RandGen
-        %{
-    if MR2(24*(d)+h+1, mod(t,3600)+1) == 1
-        B = CreateBackward(B);
-        
-    elseif MR2(24*(d)+h+1, mod(t,3600)+1) == 0
-        
-    else
-        error('Error. \nproblem crating car line B a time %d',t);
-    end
-        %}
-        
-        % with switch case
-        %{
-    switch h
-        case 0
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-            
-        case 1
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 2
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 3
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 4
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 5
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 6
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 7
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 8
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 9
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 10
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 11
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 12
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 13
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 14
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 15
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 16
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 17
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 18
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 19
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 20
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 21
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 22
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        case 23
-            if mod(t,R2(d+1,h+1)) == 0
-                B = CreateBackward(B);
-            end
-        otherwise
-            error('Error. \nIncorrect value for variable h (hour) = %d: h must be between 0 and 23',h);
-            
-    end
-        %}
-        
         
         %traffic lights
         [A, G, C, timer1] = TrafficLight(A, G, C, timer1, tg1, tr1, ttot1, wl1);
         [E, B, F, timer2] = TrafficLight(E, B, F, timer2, tg2, tr2, ttot2, wl2);
+    
         
+    if ~(wl1.isempty() || wl2.isempty)
+        error('Si riempono queue del semaforo');
+    end
         %empting D and plotting what is going out
         if D(1,1) == 0
             TD(1,t)=0;
@@ -582,12 +304,12 @@ for st=1: 1 : trep
         TxD(1,abs(i)) = (find(TD==i,1) - find(MR2==i,1));
     end
     
-    if length(TxH) < 5000
-        TxH(1,length(TxH)+1:5000)=zeros;
+    if length(TxH) < 5000*nd
+        TxH(1,length(TxH)+1:5000*nd)=zeros;
     end
     
-    if length(TxD) < 5000
-        TxD(1,length(TxD)+1:5000)=zeros;
+    if length(TxD) < 5000*nd
+        TxD(1,length(TxD)+1:5000*nd)=zeros;
     end
     
     Tx3H(st,:) = TxH;

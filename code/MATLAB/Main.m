@@ -20,9 +20,6 @@
 m = 0;      %minute
 h = 0;      %houar
 d = 0;      %day
-tstart = 54000; %time when the test car is created
-timingForward = 0; %time a car needs to run through all lines
-timingBackward = 0; %time a car needs to run through all lines
 
 %data from excel file
 %numbero f car per hour in direction Bellinzona
@@ -56,7 +53,7 @@ tr2 = 70;
 ttot2 = 2*tg2+2*tr2;
 wl2 = CQueue();
 % Simulation time parameters (DA CAMBIARE)
-nd= 1;           %number of day
+nd= 3;           %number of day
 simtime=86400 * nd - 1; %-1 so the simulation finish at 23h 59m 59s of the day set
 
 %data acuire parameter initialisation
@@ -117,7 +114,7 @@ for t=1:1:simtime
     if (C(1,length(C))>0) && (E(1,1) == 0)
         E(1,1)=C(1,length(C));
         C(1,length(C))= 0;
-    %{
+        %{
     elseif C(1,length(C))==2  && E(1,1) == 0
         C(1,length(C))= 0;
         E(1,1)=2;
@@ -130,7 +127,7 @@ for t=1:1:simtime
     if (F(1,length(F))>0) && (H(1,1) == 0)
         H(1,1)=F(1,length(F));
         F(1,length(F))= 0;
-    %{
+        %{
     elseif F(1,length(F))==2 && H(1,1) == 0
         F(1,length(F))= 0;
         H(1,1)=2;
@@ -144,7 +141,7 @@ for t=1:1:simtime
     if (C(1,1)<0) && (D(1,length(D))== 0)
         D(1,length(D))=C(1,1);
         C(1,1)= 0;
-    %{
+        %{
     elseif C(1,1)==-2 && D(1,length(D))== 0
         C(1,1)= 0;
         D(1,length(D))=-2;
@@ -157,7 +154,7 @@ for t=1:1:simtime
     if (F(1,1)<0) && (G(1,length(G))== 0)
         G(1,length(G))=F(1,1);
         F(1,1)= 0;
-    %{
+        %{
     elseif F(1,1)==-2 && G(1,length(G))== 0
         F(1,1)= 0;
         G(1,length(G))=-2;
@@ -224,8 +221,8 @@ for t=1:1:simtime
     % new car enters B line accodingi to the random matrix
     %emptyng the queue
     B = EmtingQueueBackward(B,wr2);
-     if MR2(1,86400*(d)+h*3600+mod(t,3600)+1) == 1
-         nr2 = nr2 - 1;
+    if MR2(1,86400*(d)+h*3600+mod(t,3600)+1) == 1
+        nr2 = nr2 - 1;
         B = CreateBackward(B,nr2,wr2);
         MR2(1,86400*(d)+h*3600+mod(t,3600)+1) = nr2;
         
@@ -241,16 +238,16 @@ for t=1:1:simtime
     [A, G, C, timer1] = TrafficLight(A, G, C, timer1, tg1, tr1, ttot1, wl1);
     [E, B, F, timer2] = TrafficLight(E, B, F, timer2, tg2, tr2, ttot2, wl2);
     
-    if wl1.isempty() || wl2.isempty
+    if ~(wl1.isempty() || wl2.isempty)
         error('Si riempono queue del semaforo');
-    
+    end
     %empting D and plotting what is going out
     if D(1,1) == 0
         TD(1,t)=0;
     elseif D(1,1)< 0
         TD(1,t)=D(1,1);
         D(1,1)=0;
-        car_counterD = car_counterD + 1;        
+        car_counterD = car_counterD + 1;
     end
     
     %empting H and plotting what is going out
