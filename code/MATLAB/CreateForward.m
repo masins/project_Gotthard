@@ -1,10 +1,14 @@
 %
-%INPUT:     a line with only 0 and 1
+%INPUT:     a line with only >=0 vale, the car number, the queue of the
+%line
 %
-%OUTPUT:    The same line with a car at the beginning with moving right (1) if the
-%           first place is free
+%OUTPUT:    The same line with a new car (with is own number) at the 
+%           beginning with moving right (>0) if the
+%           first place is free otherwise the car will be generete in the
+%           queue
 %
-%ERROR:     If the line contai numbers that are not 0 or 1
+%ERROR:     if the car number is negativ, if there are negativ car int the
+%           line
 
 
 function y = CreateForward(X,n, wl)

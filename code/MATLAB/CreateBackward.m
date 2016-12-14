@@ -1,11 +1,15 @@
 %
-%INPUT:     a line with <=0 value, n number of the car, waiting list, test
-%waiting list
+%INPUT:     a line with only <=0 vale, the negativ car number, the queue of 
+%           the line
 %
-%OUTPUT:    The same line with a car at the end with moving left (-1) if the
-%           last place is free
+%OUTPUT:    The same line with a new car (with is own number) at the 
+%           beginning with moving left (<0) if the
+%           last place is free otherwise the car will be generete in the
+%           queue
 %
-%ERROR:     If the line contai numbers that are not 0 or -1
+%ERROR:     if the car number is positiv, if there are positiv car int the
+%           line
+
 
 function y = CreateBackward(X,n,wl)
 
