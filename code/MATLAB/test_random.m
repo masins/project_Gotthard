@@ -39,7 +39,7 @@ MRR2 = RandGen (R2);
 nd= 3;
 simtime=86400 * nd - 1; %-1 so the simulation finish at 23h 59m 59s of the day set
 
-trep = 5;
+trep = 250;
 flux3D= zeros(trep,nd*24);
 flux3H= zeros(trep,nd*24);
 Tx3H= zeros(trep,5000*nd);
@@ -87,14 +87,14 @@ for st=1: 1 : trep
     
     % FIRST traffic light parameters
     timer1=0;
-    tg1 = 5+20*st;
+    tg1 = 2+1*st;
     tr1 = 40;
     ttot1 = 2*tg1+2*tr1;
     wl1 = CQueue();
     
     % SECOND traffic light parameters
     timer2=0;
-    tg2 = 5+20*st;
+    tg2 = 2+1*st;
     tr2 = 70;
     ttot2 = 2*tg2+2*tr2;
     wl2 = CQueue();
@@ -380,7 +380,7 @@ mesh(Tx3H);
 xlabel('car number'),
 ylabel('number of iterations');
 zlabel('time to pass');
-title('Flux of cars to Bellinzona');
+title('Flux of cars to Airolo');
 
 
 %3D plot
@@ -390,7 +390,7 @@ mesh(flux3D);
 xlabel('hours'),
 ylabel('number of iterations');
 zlabel('number of cars');
-title('Flux of cars to Goeschenen');
+title('Travel Time to Goeschenen');
 
 
 subplot(2,1,2);
@@ -398,7 +398,7 @@ mesh(flux3H);
 xlabel('hours'),
 ylabel('number of iterations');
 zlabel('number of cars');
-title('Flux of cars to Bellinzona');
+title('Travel Time to Airolo');
 
 
 
