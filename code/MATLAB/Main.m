@@ -6,16 +6,18 @@
 %E: line from left to right second side
 %G: line from right to left second side
 %F: double line second side
-%H: free line from left to right second side
+%H: free line from left to right second side 
 %
-%Goeschenen                                                      Bellinzona
+%Goeschenen                                                      Airolo
 % ---------------_____________-------------------____________--------------
 %    <<Line D<<                    <<Line G<<                  <<Line B<<
 % --------------- <<Line C>>  ------------------- <<Line F>> --------------
 %    >>Line A>>  _____________     >>Line E>>    ____________  >>Line H>>
 % ---------------             ------------------             --------------
-%                ligth n. 1                       ligth n. 2
+%                  light n. 1                     light n. 2
 
+%add path to use queue class
+addpath('../datastrcuture/');
 %time initialise
 m = 0;      %minute
 h = 0;      %houar
@@ -41,19 +43,20 @@ wr2 = CQueue();
 
 % FIRST traffic light parameters
 timer1=0;
-tg1 = 30;
+tg1 = 300;
 tr1 = 40;
 ttot1 = 2*tg1+2*tr1;
 wl1 = CQueue();
 
 % SECOND traffic light parameters
 timer2=0;
-tg2 = 30;
+tg2 = 40;
 tr2 = 70;
 ttot2 = 2*tg2+2*tr2;
 wl2 = CQueue();
-% Simulation time parameters (DA CAMBIARE)
-nd= 3;           %number of day
+
+% Simulation time parameters 
+nd= 1;           %number of day
 simtime=86400 * nd - 1; %-1 so the simulation finish at 23h 59m 59s of the day set
 
 %data acuire parameter initialisation
@@ -72,7 +75,7 @@ fluxH = zeros(1,lxH);
 % initially void
 % a space is 5 meter
 af=100;
-bf=100;
+bf=af;
 cf=78;
 df=af;
 ef=136;
@@ -312,23 +315,32 @@ y = zeros(lxD,2);
 y(:,1) = fluxD(1,:);
 y(:,2) = fluxH(1,:);
 b = bar(y);
-b(1).FaceColor = [0 .5 0];
-b(1).LineWidth = 1.5;
-b(2).FaceColor = [0.7843 0.7843 0.0392];
-b(2).LineWidth = 1.5;
-legend('flux to Goeschenen','flux to Airolo');
+b(1).FaceColor = [0 .7 0];
+b(1).LineWidth = 0.1;
+b(2).FaceColor = [.8 0 0];
+b(2).LineWidth = 0.1;
+
+h_legend=legend('flux to Goeschenen','flux to Airolo','location','northwest');
+title('Flux','fontsize',16);
+xlabel('Hours','fontsize',16);
+ylabel('Number of cars','fontsize',16);
+set(h_legend,'fontsize',16);
+set(gca,'fontsize',16);
+
 
 
 % plot of how much time dase it take to pass the pass
 figure
 subplot(2,1,1);
 area (TxH);
-title('Time to arrive in Airolo from Goeschenen');
-xlabel('Car Number');
-ylabel('time to go through the pass [s]');
+title('Airolo Direction','fontsize',16);
+xlabel('Car Label','fontsize',16);
+ylabel('travel time [s]','fontsize',16);
+set(gca,'fontsize',16);
 
 subplot(2,1,2);
 area (TxD);
-title('Time to arrive in Goeschenen from Airolo');
-xlabel('Car Number * (-1)');
-ylabel('time to go through the pass [s]');
+title('Goeschenen Direction','fontsize',16);
+xlabel('Car Label * (-1)','fontsize',16);
+ylabel('travel time [s]','fontsize',16);
+set(gca,'fontsize',16);

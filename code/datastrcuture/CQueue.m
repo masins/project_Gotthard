@@ -59,14 +59,14 @@ classdef CQueue < handle
                 obj.rear = numel(c) + 1;
                 obj.capacity = 2*numel(c);
             elseif nargin >= 1
-                obj.buffer = cell(100, 1);
+                obj.buffer = cell(100000, 1);
                 obj.buffer{1} = c;
                 obj.beg = 1;
                 obj.rear = 2;
-                obj.capacity = 100;                
+                obj.capacity = 100000;                
             else
-                obj.buffer = cell(100, 1);
-                obj.capacity = 100;
+                obj.buffer = cell(100000, 1);
+                obj.capacity = 100000;
                 obj.beg = 1;
                 obj.rear = 1;
             end
