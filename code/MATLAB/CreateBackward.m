@@ -27,8 +27,7 @@ end
 
 if X(1,length(X))==0 
             X(1,length(X))= wl.pop;
-%else
-%   errordlg('Linea piena CreateBackward');%   error('see dialog box');
+
 end
 y=X;
 end

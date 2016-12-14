@@ -26,8 +26,6 @@ end
 
 if X(1,1)==0
         X(1,1)=wl.pop();
-%else
-%    errordlg('Linea piena Create Forward');
 end
 y=X;
 end
