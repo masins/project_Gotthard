@@ -18,7 +18,7 @@
 
 
 
-
+%% Iitialising data
 %time initialise
 m = 0;      %minute
 h = 0;      %hour
@@ -59,8 +59,10 @@ ff=100;
 gf=ef;
 hf=bf;
 
+%% Begin multiple iteration with chancing time
 for st=1: 1 : trep
     
+    %% Initialaising and resetting parameter for each iteration
     
     TH=zeros(1,simtime);
     TD=zeros(1,simtime);
@@ -110,10 +112,10 @@ for st=1: 1 : trep
     H=zeros(1,hf);
     
     
-    
+    %% Singol simulation
     for t=1:1:simtime
         
-        
+        %% Minute hour and day parameter
         % minute counter
         if (t>0) && (mod(t,60)==0)
             m = m+1;
@@ -129,62 +131,35 @@ for st=1: 1 : trep
             h=0;
         end
         
+        %% Moving car
         
+        %  AUTOMATIC MOUVMENT
         
         %move car to the new section after finish C --> E
         if (C(1,length(C))>0) && (E(1,1) == 0)
             E(1,1)=C(1,length(C));
             C(1,length(C))= 0;
-            %{
-    elseif C(1,length(C))==2  && E(1,1) == 0
-        C(1,length(C))= 0;
-        E(1,1)=2;
-        elseif C(1,length(C))==0 || C(1,length(C))==-1 || C(1,length(C))==-2
-    else
-        error('qualcosa non funzione nel movimento automatico');
-            %}
         end
+        
         %move car to the new section after finish F --> H
         if (F(1,length(F))>0) && (H(1,1) == 0)
             H(1,1)=F(1,length(F));
             F(1,length(F))= 0;
-            %{
-    elseif F(1,length(F))==2 && H(1,1) == 0
-        F(1,length(F))= 0;
-        H(1,1)=2;
-    elseif F(1,length(F))==0 || F(1,length(F))==-1 || F(1,length(F))==-2
-    else
-        error('qualcosa non funzione nel movimento automatico');
-            %}
         end
         
         %move car to the new section after finish C --> D
         if (C(1,1)<0) && (D(1,length(D))== 0)
             D(1,length(D))=C(1,1);
             C(1,1)= 0;
-            %{
-    elseif C(1,1)==-2 && D(1,length(D))== 0
-        C(1,1)= 0;
-        D(1,length(D))=-2;
-    elseif C(1,1)==0|| C(1,1)==1 || C(1,1)==2
-    else
-        error('qualcosa non funzione nel movimento automatico');
-            %}
         end
+        
         %move car to the new section after finish F --> G
         if (F(1,1)<0) && (G(1,length(G))== 0)
             G(1,length(G))=F(1,1);
             F(1,1)= 0;
-            %{
-    elseif F(1,1)==-2 && G(1,length(G))== 0
-        F(1,1)= 0;
-        G(1,length(G))=-2;
-    elseif F(1,1)==0 || F(1,1)==1 || F(1,1)==2
-    else
-        error('qualcosa non funzione nel movimento automatico');
-            %}
         end
         
+        % NORMAL MOUVMENT
         %each car moves 2 space in the rigth direction if possible
         A = MoveForward(A);
         A = MoveForward(A);
@@ -207,25 +182,12 @@ for st=1: 1 : trep
         F = MoveBackward(F);
         F = MoveBackward(F);
         
-        % create test car with value either +2 or -2, depending on the direction
-        %{
-    if t == tstart
-        if A(1,1)==0
-            A(1,1)=2;
-        elseif A(1,1) == 1
-            A(1,1) = 2;
-        end
-        if B(1,length(B))==0
-             B(1,length(B))=-2;
-        elseif B(1,length(B)) == -1
-            B(1,length(B)) = -2;
-        end
-    end
-        %}
         
-        % new car enters A line accodingi to the random matrix
-        %emptying the queue
+        %% CREATING CAR SECTION
+        
+        %first we have to emting the queue for A
         A = EmtingQueueForward(A,wr1);
+        % new car enters A line accodingi to the random matrix
         if MR1(1, 86400*(d)+h*3600+mod(t,3600)+1) == 1
             nr1 = nr1 + 1;
             A = CreateForward(A,nr1, wr1);
@@ -237,9 +199,9 @@ for st=1: 1 : trep
             error('Error. \nproblem crating car line A a time %d',t);
         end
         
-        % new car enters B line accodingi to the random matrix
-        %emptyng the queue
+        %first we have to emting the queue for B
         B = EmtingQueueBackward(B,wr2);
+        % new car enters B line accodingi to the random matrix        
         if MR2(1,86400*(d)+h*3600+mod(t,3600)+1) == 1
             nr2 = nr2 - 1;
             B = CreateBackward(B,nr2,wr2);
@@ -253,14 +215,16 @@ for st=1: 1 : trep
         
         
         
-        %traffic lights
+        
+        %% traffic lights
         [A, G, C, timer1] = TrafficLight(A, G, C, timer1, tg1, tr1, ttot1, wl1);
         [E, B, F, timer2] = TrafficLight(E, B, F, timer2, tg2, tr2, ttot2, wl2);
-    
         
-    if ~(wl1.isempty() || wl2.isempty)
-        error('Si riempono queue del semaforo');
-    end
+        if ~(wl1.isempty() || wl2.isempty)
+            error('Si riempono queue del semaforo');
+        end
+        
+        %% Prepering vector to plot
         %empting D and plotting what is going out
         if D(1,1) == 0
             TD(1,t)=0;
@@ -291,6 +255,7 @@ for st=1: 1 : trep
         
     end
     
+    %% Prepering data 3D plotting
     %maxing array with time op percorenza passo fo each car(first car has
     %number 2)
     %direction Bellinzona
@@ -326,43 +291,7 @@ end
 
 
 
-%{
-% PLOTS
-% fluxD represents the flux of cars through D
-figure
-subplot(2,1,1); % add first plot in 2 x 1 grid
-
-xD = 0:lxD -1;
-hp = area(xD,fluxD);
-hp(1).FaceColor = [0 .5 0];
-hp(1).LineWidth = 1;
-title('Flux of cars to Bellinzona');
-xlabel('hours');
-ylabel('number of cars');
-
-% fluxH represents the flux of cars through H
-subplot(2,1,2);% add second plot in 2 x 1 gri
-xH = 0:lxH-1;
-dp = area(xH,fluxH);
-dp(1).FaceColor = [0.7843 0.7843 0.0392];
-dp(1).LineWidth = 1.5;
-title('Flux of cars to Goeschenen');
-xlabel('hours');
-ylabel('number of cars');
-
-figure
-
-% confront fluxes
-y = zeros(lxD,2);
-y(:,1) = fluxD(1,:);
-y(:,2) = fluxH(1,:);
-b = bar(y);
-b(1).FaceColor = [0 .5 0];
-b(1).LineWidth = 1.5;
-b(2).FaceColor = [0.7843 0.7843 0.0392];
-b(2).LineWidth = 1.5;
-legend('flux to Bellinzona','flux to Goeschenen');
-%}
+%% 3D plotting
 
 % plot of how much time dase it take to pass the pass
 %3D plot
