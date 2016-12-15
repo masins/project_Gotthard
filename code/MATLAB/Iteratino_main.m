@@ -62,7 +62,7 @@ hf=bf;
 %% Begin multiple iteration with chancing time
 for st=1: 1 : trep
     
-    %% Initialaising and resetting parameter for each iteration
+    %% Initialising and resetting parameters for each iteration
     
     TH=zeros(1,simtime);
     TD=zeros(1,simtime);
@@ -220,7 +220,7 @@ for st=1: 1 : trep
         [A, G, C, timer1] = TrafficLight(A, G, C, timer1, tg1, tr1, ttot1, wl1);
         [E, B, F, timer2] = TrafficLight(E, B, F, timer2, tg2, tr2, ttot2, wl2);
         
-        if ~(wl1.isempty() || wl2.isempty)
+        if ~(wl1.isempty() && wl2.isempty)
             error('Si riempono queue del semaforo');
         end
         

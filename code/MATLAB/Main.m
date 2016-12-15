@@ -195,7 +195,7 @@ for t=1:1:simtime
     [A, G, C, timer1] = TrafficLight(A, G, C, timer1, tg1, tr1, ttot1, wl1);
     [E, B, F, timer2] = TrafficLight(E, B, F, timer2, tg2, tr2, ttot2, wl2);
     % Chek that there is no
-    if ~(wl1.isempty() || wl2.isempty)
+    if ~(wl1.isempty() && wl2.isempty)
         error('Si riempono queue del semaforo');
     end
     %empting D and plotting what is going out

@@ -6,7 +6,7 @@
 % t = timer
 % tg = time green, parameter corresponds to duration of green light
 % tr = time red, parameter corresponds to duration of red light
-% wl = queue at the ligth, necessary for move forward, must be empty
+% wl = queue at the light, necessary for MoveForward(), must be empty
 %
 % OUTPUT:
 % nL,nR,nC = new left, right and center line

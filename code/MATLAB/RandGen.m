@@ -15,18 +15,18 @@ for d=0 : 1 :2
         N = R(d+1,h);
         M = tot - N;
 
-        %the vector of that hour with only 1(create car) and 0(not crate)
+        %the vector of that hour with only 1(create car) and 0(not create)
         X = [zeros(1,M), ones(1,N)];
         
         %randomising
         X = X(randperm(tot));
 
-        %prepering random matrix
+        %preparing random matrix
         Y(24*d+h,:)=X;
     end
 end
 
-%Matrix in vectot trasformation
+%Matrix in vector transformation
 Y = Y';
 Y= Y(:)';
 

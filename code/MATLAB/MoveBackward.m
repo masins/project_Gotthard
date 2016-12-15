@@ -1,5 +1,5 @@
 %
-% function moves a car one step forward on the LEFT if it is possible
+% function moves a car one step forward on the LEFT iff it is possible
 % if there is already another car nothing happens
 
 function y = MoveBackward(X)

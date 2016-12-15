@@ -1,13 +1,13 @@
 %
-%INPUT:     a line with only >=0 vale, the car number, the queue of the
+%INPUT:     a line with only >=0 value, the car number, the queue of the
 %line
 %
 %OUTPUT:    The same line with a new car (with is own number) at the 
 %           beginning with moving right (>0) if the
-%           first place is free otherwise the car will be generete in the
+%           first place is free otherwise the car will be generated in the
 %           queue
 %
-%ERROR:     if the car number is negativ, if there are negativ car int the
+%ERROR:     if the car number is negative, if there are negative cars int the
 %           line
 
 
@@ -20,7 +20,7 @@ end
     
 for i = 1:1:length(X)
     if X(1,i) < 0
-        error('Error. \nThe create Forward line have a negative value (1,%d)',i);
+        error('Error. \nThe create Forward line has a negative value (1,%d)',i);
     end
 end
 
