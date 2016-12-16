@@ -1,27 +1,27 @@
 %
-%INPUT:     a line with only <=0 vale, the negativ car number, the queue of 
+%INPUT:     a line with only <=0 vale, the negative car number, the queue of 
 %           the line
 %
-%OUTPUT:    The same line with a new car (with is own number) at the 
+%OUTPUT:    The same line with a new car (with its own number) at the 
 %           beginning with moving left (<0) if the
-%           last place is free otherwise the car will be generete in the
-%           queue
+%           last place is free (otherwise the car will be generated in the
+%           queue)
 %
-%ERROR:     if the car number is positiv, if there are positiv car int the
+%ERROR:     if the car number is positive || if there are positive cars in the
 %           line
 
 
 function y = CreateBackward(X,n,wl)
 
 if n>=0
-    error('Error. Cratingo a positiv or 0 car Backward');
+    error('Error. Crating a positive- or zero-labeled car moving backward is not possible');
 else
     wl.push(n);
 end
 
 for i = 1:1:length(X)
     if X(1,i) > 0
-        error('Error. \nThe move backward line have a wrong value at (1,%d)',i);
+        error('Error. \nThe line has a positive value at position (1,%d)',i);
     end
 end
 

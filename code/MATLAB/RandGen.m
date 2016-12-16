@@ -1,8 +1,10 @@
-%make the random generation pro houar
-%Input: A matrix with the number of car for each hour(colon) and each
-%       day(row)
 %
-%Output: A vector with 0 and 1 rnadon corrispondig at car cration in an hour 
+%encodes random generation of cars for every hour
+%INPUT: A matrix with the number of cars for each hour (colon) and each
+%       day (row)
+%
+%OUTPUT: A vector with 0 and 1 randomly distributed 
+%corresponding to cars entering the Gotthard pass in an hour 
 
 function Y =  RandGen(R)
 Y = zeros(24*3,3600);

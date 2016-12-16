@@ -148,7 +148,7 @@ for t=1:1:simtime
     end
     
     % each car moves 2 cells to the right (or to the left) if possible
-    % estimated velocity 10 m/s (data from ASTRA)
+    % estimated velocity 11 m/s (data from ASTRA)
     %
     A = MoveForward(A);
     A = MoveForward(A);
@@ -183,7 +183,7 @@ for t=1:1:simtime
     elseif MR1(1, 86400*(d)+h*3600+mod(t,3600)+1) == 0
         
     else
-        error('Error. \nProblem encountered creating car in line A at time %d',t);
+        error('Error. \nproblem crating car line A a time %d',t);
     end
     
     %emptying the queue
@@ -198,7 +198,7 @@ for t=1:1:simtime
     elseif MR2(1, 86400*(d)+h*3600+mod(t,3600)+1) == 0
         
     else
-        error('Error. \nProblem encountered creating car in line B at time %d',t);
+        error('Error. \nproblem crating car line B a time %d',t);
     end
     
     
@@ -208,7 +208,7 @@ for t=1:1:simtime
     [E, B, F, timer2] = TrafficLight(E, B, F, timer2, tg2, tr2, ttot2, wl2);
     % Check that there is no car
     if ~(wl1.isempty() && wl2.isempty)
-        error('Traffic light Queues are filled');
+        error('Si riempono queue del semaforo');
     end
     %emptying D and plotting
     if D(1,1) == 0
@@ -238,7 +238,7 @@ for t=1:1:simtime
     
 end
 
-%array with time needed to pass through Gotthard pass for each car(first car has
+%maxing array with time needed to pa for each car(first car has
 %number 2)
 %direction Bellinzona
 TxH = zeros(1, max(TH));

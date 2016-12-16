@@ -197,12 +197,12 @@ for st=1: 1 : trep
         elseif MR1(1, 86400*(d)+h*3600+mod(t,3600)+1) == 0
             
         else
-            error('Error. \nProblem encountered creating car in line A at time %d',t);
+            error('Error. \nproblem crating car line A a time %d',t);
         end
         
-        %first we have to empty the queue for B
+        %first we have to emting the queue for B
         B = EmtingQueueBackward(B,wr2);
-        % new car enters B line according to the random matrix        
+        % new car enters B line accodingi to the random matrix        
         if MR2(1,86400*(d)+h*3600+mod(t,3600)+1) == 1
             nr2 = nr2 - 1;
             B = CreateBackward(B,nr2,wr2);
@@ -211,7 +211,7 @@ for st=1: 1 : trep
         elseif MR2(1, 86400*(d)+h*3600+mod(t,3600)+1) == 0
             
         else
-            error('Error. \nProblem encountered creating car in line B at time %d',t);
+            error('Error. \nproblem crating car line B a time %d',t);
         end
         
         
@@ -222,11 +222,11 @@ for st=1: 1 : trep
         [E, B, F, timer2] = TrafficLight(E, B, F, timer2, tg2, tr2, ttot2, wl2);
         
         if ~(wl1.isempty() && wl2.isempty)
-            error('Traffic light Queues are filled');
+            error('Si riempono queue del semaforo');
         end
         
-        %% Preparing vector to plot
-        %emptying D and plotting
+        %% Prepering vector to plot
+        %empting D and plotting what is going out
         if D(1,1) == 0
             TD(1,t)=0;
         elseif D(1,1)< 0
@@ -235,7 +235,7 @@ for st=1: 1 : trep
             car_counterD = car_counterD + 1;
         end
         
-        %emptying H and plotting
+        %empting H and plotting what is going out
         if H(1,length(H)) == 0
             TH(1,t)=0;
         elseif H(1,length(H)) > 0
@@ -244,7 +244,7 @@ for st=1: 1 : trep
             car_counterH = car_counterH +1;
         end
         
-        %plotting fluxes
+        %Plotting things
         if mod(t,3600) == 0 && h < 24
             fluxD(1,d*24+h+1)=car_counterD;
             fluxH(1,d*24+h+1)=car_counterH;
@@ -256,8 +256,8 @@ for st=1: 1 : trep
         
     end
     
-    %% Preparing data for 3D plotting
-    %array with time needed to pass through Gotthard pass for each car (first car has
+    %% Prepering data 3D plotting
+    %maxing array with time op percorenza passo fo each car(first car has
     %number 2)
     %direction Bellinzona
     TxH = zeros(1, max(TH));
@@ -294,8 +294,8 @@ end
 
 %% 3D plotting
 
-% plot: time needed to pass through
-% 3D plot
+% plot of how much time dase it take to pass the pass
+%3D plot
 figure
 subplot(2,1,1);
 mesh(Tx3D);
