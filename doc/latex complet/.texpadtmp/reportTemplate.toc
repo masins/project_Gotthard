@@ -1,0 +1,28 @@
+\contentsline {section}{\numberline {1}Abstract}{5}
+\contentsline {section}{\numberline {2}Individual contributions}{5}
+\contentsline {section}{\numberline {3}Introduction}{5}
+\contentsline {subsection}{\numberline {3.1}Motivation}{6}
+\contentsline {subsection}{\numberline {3.2}Area of study}{6}
+\contentsline {section}{\numberline {4}Description of the Model}{6}
+\contentsline {subsection}{\numberline {4.1}Model Concept}{6}
+\contentsline {subsection}{\numberline {4.2}Situation}{7}
+\contentsline {section}{\numberline {5}Implementation}{7}
+\contentsline {subsection}{\numberline {5.1}Dataset}{7}
+\contentsline {subsection}{\numberline {5.2}Simplifications}{8}
+\contentsline {subsubsection}{\numberline {5.2.1}Limitations}{8}
+\contentsline {section}{\numberline {6}Simulation Results and Discussion}{9}
+\contentsline {subsection}{\numberline {6.1}Dataset Analysis}{9}
+\contentsline {subsection}{\numberline {6.2}Matlab Results}{10}
+\contentsline {subsection}{\numberline {6.3}Ideal Situation}{11}
+\contentsline {subsection}{\numberline {6.4}Limit Situations}{12}
+\contentsline {subsubsection}{\numberline {6.4.1}Short Green Phase Times}{12}
+\contentsline {subsubsection}{\numberline {6.4.2}Long Green Phase Times}{14}
+\contentsline {subsubsection}{\numberline {6.4.3}Combining Long and Short Green Phase times}{15}
+\contentsline {subsection}{\numberline {6.5}Finding Ideal Green Phase}{18}
+\contentsline {section}{\numberline {7}Summary and Outlook}{20}
+\contentsline {subsection}{\numberline {7.1}Conclusion}{20}
+\contentsline {subsection}{\numberline {7.2}Outlook}{20}
+\contentsline {section}{\numberline {8}References}{21}
+\contentsline {section}{\numberline {9}Appendix}{22}
+\contentsline {subsection}{\numberline {9.1}Simulating Matlab results on 3 days}{22}
+\contentsline {subsection}{\numberline {9.2}Main.m}{28}
